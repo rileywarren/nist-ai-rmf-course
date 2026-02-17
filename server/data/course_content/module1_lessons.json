@@ -1,0 +1,175 @@
+{
+  "lessons": [
+    {
+      "id": "m1-welcome",
+      "moduleId": "module-1",
+      "title": "Welcome & Course Overview",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Welcome to *NIST AI RMF* (Artificial Intelligence Risk Management Framework) and this first module. *NIST AI RMF 1.0* was published in *January 2023* to give organizations a practical structure for AI risk governance and lifecycle-aware management. It is explicitly tied to U.S. policy direction under the **National Artificial Intelligence Initiative Act of 2020**, which directed NIST to support AI risk management and trust frameworks. (NIST AI RMF 1.0, *Foreword* and introductory context.)\n\nIn this course, you will learn the foundation of the Framework from the language of the document itself, including the vocabulary, risk framing, and the practical tradeoffs that make real deployments manageable rather than purely theoretical. The framework is positioned as a common approach that can be adapted to many sectors, use cases, and governance environments."
+        },
+        {
+          "type": "text",
+          "content": "The AI RMF is designed as a **voluntary** and **rights-preserving** framework, not a mandatory regulation by itself. That is an important distinction: it is meant to support responsible deployment and risk handling where laws, policies, and organizational governance already exist, not replace them. (NIST AI RMF 1.0, Section 1.1.)\n\nIts non-sector-specific design is another key feature. Rather than targeting one industry (for example, finance or healthcare), it is intended to be applied across sectors and geographies in ways that fit organizational mission and governance context. It is also *use-case agnostic*, meaning it helps you ask the right questions for *the specific decision, model, and operating environment* where AI is used, instead of only describing abstract best practices."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "AI System definition (NIST AI RMF 1.0 glossary language)",
+          "content": "An engineered or machine-based system that can, for a given set of objectives, generate outputs such as predictions, recommendations, or decisions influencing real or virtual environments. AI systems are designed to operate with varying levels of autonomy."
+        },
+        {
+          "type": "text",
+          "content": "The Framework has two core parts. **Part 1: Foundational Information** explains the core concepts, the intended audience, key terms, and the risk vocabulary needed to use the Framework consistently. **Part 2: Core and Profiles** moves into the practical implementation model, including how organizations identify, measure, and manage risks across AI systems and their lifecycle. (NIST AI RMF 1.0, *Table of Contents* and introductory sections.)\n\nWhen teaching teams, this split is useful: Part 1 gives the shared language; Part 2 gives the workflow. That is why Module 1 emphasizes meaning, scope, and framing before moving into detailed profiles and trustworthiness characteristics in later modules."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "core-functions",
+          "caption": "Core Functions of the AI RMF: Govern, Map, Measure, Manage. Use this lens throughout the course to track how risk understanding and controls move from alignment to action."
+        },
+        {
+          "type": "text",
+          "content": "You will also see that the AI RMF emphasizes integration with real-world operations rather than a one-time compliance exercise. The framework gives structure for governance teams, model owners, legal/compliance stakeholders, and leadership to align on how risk is defined, controlled, communicated, and improved over time. (NIST AI RMF 1.0, Section 1.1 and surrounding framing text.)\n\nAs you progress through this module, keep asking: *where does this activity live in our organization today, and where should it live after we adopt the Framework?* That question is central to making AI risk management practical instead of purely aspirational."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "poll",
+          "question": "How familiar are you with AI risk management frameworks?",
+          "options": [
+            { "label": "Brand new to this", "value": "beginner" },
+            { "label": "Some awareness", "value": "intermediate" },
+            { "label": "Experienced practitioner", "value": "advanced" }
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "NIST AI RMF 1.0 (Jan 2023) is a voluntary, non-prescriptive framework intended to support, not replace, legal and organizational obligations (NIST AI RMF 1.0, Section 1.1).",
+        "The framework is rights-preserving, non-sector-specific, and use-case agnostic, making it adaptable across sectors and deployment contexts (NIST AI RMF 1.0, Section 1.1).",
+        "Core terminology starts with a precise notion of an AI system and with common governance stages for managing AI risk over its lifecycle (NIST AI RMF 1.0, glossary and Part 1).",
+        "The framework is organized into Part 1 (foundations) and Part 2 (core and profiles), and the core functions provide the operating model for implementation."
+      ]
+    },
+    {
+      "id": "m1-risk-impacts-harms",
+      "moduleId": "module-1",
+      "title": "Understanding Risk, Impacts, and Harms",
+      "sections": [
+        {
+          "type": "text",
+          "content": "In AI governance, the first step is agreeing on what we mean by *risk*. NIST AI RMF uses an ISO-aligned definition: risk is the **composite measure of an event's probability of occurring and the magnitude or degree of the consequences**. In practice, this means the same consequence has different urgency depending on how likely it is, and unlikely events can still matter if consequences are severe. (NIST AI RMF 1.0, Section 1.2.1; ISO 31000:2018.)\n\nThis formulation is powerful because it separates *what* might happen from *how bad* it would be, and then combines them into a single analytic lens. It also keeps discussions concrete: teams can debate probabilities and impacts separately before combining them into prioritization decisions."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "Risk Management definition (from ISO 31000, as used in NIST AI RMF)",
+          "content": "Coordinated activities to direct and control an organization with regard to risk."
+        },
+        {
+          "type": "text",
+          "content": "One subtle but crucial point in the Framework is that **risk framing includes both negative and positive impacts**. It is not only about preventing harm; it is also about understanding when and how AI can improve outcomes, and whether benefits justify managed risk. (NIST AI RMF 1.0, Section 1.2.1.)\n\nThis is especially relevant when stakeholders have competing goals—efficiency, safety, fairness, speed to market, explainability—and when those goals are traded against each other in deployment decisions. The Framework encourages evidence-driven discussion so teams can communicate these tradeoffs clearly."
+        },
+        {
+          "type": "text",
+          "content": "Figure-level framing in the Framework groups AI harms into three broad categories. First, **harms to people**, which include harms to individuals, to communities, and to societal conditions such as democratic participation and rights. Second, **harms to organizations**, including operational disruption, security and monetary losses, and reputational damage. Third, **harms to ecosystems**, capturing downstream effects on interconnected systems, global systems, and natural resources. (NIST AI RMF 1.0, Section 1.2 and Figure 1.)\n\nUsing these categories helps teams avoid narrow silo thinking. For example, a model error can affect one person directly, generate legal and financial loss for the organization, and at the same time propagate to partners and shared infrastructure. The taxonomy is a reminder that AI risk is rarely one-dimensional."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "harms-taxonomy",
+          "caption": "Harm taxonomy from NIST AI RMF Figure 1: Harm to People, Harm to Organizations, and Harm to Ecosystems."
+        },
+        {
+          "type": "text",
+          "content": "As you practice, map each identified harm to where its consequences land first and where they could cascade. This is where the Framework's 'measure' and 'manage' functions become operational: quantifying likelihood and impact, and then applying controls that reflect true harm pathways. (NIST AI RMF 1.0, Section 1.2; Section 3.5 guidance on trustworthiness context in later modules.)\n\nIn this drag-and-drop activity, the goal is classification discipline: can you correctly place each harm in the right bucket before considering control options?"
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "dragDrop",
+          "instruction": "Drag each example harm to the correct category.",
+          "items": [
+            {"id": "h1", "label": "Discrimination against a population sub-group"},
+            {"id": "h2", "label": "Harm to an organization's business operations"},
+            {"id": "h3", "label": "Harm to natural resources and the environment"},
+            {"id": "h4", "label": "Harm to a person's civil liberties or rights"},
+            {"id": "h5", "label": "Security breaches or monetary loss"},
+            {"id": "h6", "label": "Harm to the global financial system"},
+            {"id": "h7", "label": "Harm to democratic participation"},
+            {"id": "h8", "label": "Harm to an organization's reputation"},
+            {"id": "h9", "label": "Harm to interconnected and interdependent elements"},
+            {"id": "h10", "label": "Harm to a person's physical or psychological safety"},
+            {"id": "h11", "label": "Harm to supply chain or interrelated systems"},
+            {"id": "h12", "label": "Harm to a person's economic opportunity"}
+          ],
+          "zones": [
+            {"id": "people", "label": "Harm to People", "correctItems": ["h1", "h4", "h7", "h10", "h12"]},
+            {"id": "org", "label": "Harm to an Organization", "correctItems": ["h2", "h5", "h8"]},
+            {"id": "ecosystem", "label": "Harm to an Ecosystem", "correctItems": ["h3", "h6", "h9", "h11"]}
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Risk in the AI RMF combines likelihood and impact, following the ISO 31000 composite view adapted in NIST AI RMF 1.0 (Section 1.2.1).",
+        "Risk management is a coordinated, organization-wide activity, not a standalone technical checklist (NIST AI RMF 1.0, Section 1.2.1).",
+        "The Framework treats impacts as both positive and negative, keeping benefit realization and harm prevention in the same governance conversation.",
+        "Figure 1 harm taxonomy—People, Organizations, and Ecosystems—provides a shared structure for tracing direct and cascading AI impacts (NIST AI RMF 1.0, Figure 1)."
+      ]
+    },
+    {
+      "id": "m1-challenges",
+      "moduleId": "module-1",
+      "title": "Challenges for AI Risk Management",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 1.2 of NIST AI RMF 1.0 explicitly notes that translating AI risk frameworks into practice is difficult because risk emerges across technical, organizational, and societal layers. This section is especially important because it explains *why* generic enterprise risk methods often need adaptation when AI is in scope. (NIST AI RMF 1.0, Section 1.2.)\n\nFor teams starting out, this is often the most freeing part of the document: it legitimizes uncertainty. The Framework does not pretend that all risks are cleanly measurable from day one; it gives a language to work forward from knowns and unknowns."
+        },
+        {
+          "type": "text",
+          "content": "In **Section 1.2.1 (Risk Measurement)**, the document highlights several technical obstacles. Risk can arise from **third-party software and data dependencies**, where model quality and security posture may change outside your direct control. Risks also evolve as systems shift from lab settings to real-world operation, producing **emergent behavior** that is hard to predict from development tests alone. (NIST AI RMF 1.0, Section 1.2.1.)\n\nThe Framework also points to the absence of universally reliable AI risk metrics and the challenge of deciding how to measure risks across lifecycle stages such as design, development, deployment, and monitoring. These constraints explain why risk programs often need phased controls rather than one-off scoring events."
+        },
+        {
+          "type": "text",
+          "content": "Still in risk measurement, NIST emphasizes practical limits in **observability** and **inscrutability**. Inscrutability refers to difficulty explaining or tracing internal model behavior sufficiently for governance decisions. Another nuance is the role of a **human baseline**: many AI tasks are compared against human performance, judgment variance, and acceptable limits of error, which vary by context and time. (NIST AI RMF 1.0, Section 1.2.1.)\n\nBecause AI systems are adaptive and data-dependent, teams may need ongoing model and data monitoring as an integral component of measurement—not a periodic check box. The challenge is not that measurement is impossible; it is that measurement must be continuous and contextual."
+        },
+        {
+          "type": "text",
+          "content": "In **Section 1.2.2 (Risk Tolerance)**, the Framework reminds practitioners that tolerance is **contextual and application-specific**. A risk profile acceptable for one business use case can be unacceptable in another, even with the same technical control stack. Risk tolerance also changes over time as regulations evolve, social norms shift, and enterprise strategy changes. (NIST AI RMF 1.0, Section 1.2.2.)\n\nThe Framework does not define a single threshold for all organizations. Instead, it asks: *what level of residual risk is acceptable for this AI actor's objectives and stakeholders?* In regulated environments, legal and ethical expectations may force lower tolerances than in experimental settings."
+        },
+        {
+          "type": "callout",
+          "style": "info",
+          "title": "Document guidance on integration",
+          "content": "The Framework is intended to be flexible and to augment existing risk practices which should align with applicable laws, regulations, and norms."
+        },
+        {
+          "type": "text",
+          "content": "**Section 1.2.3 (Risk Prioritization)** warns that not all risks are equal. Resources are finite, and organizations need to direct effort to what matters most. High-severity, high-likelihood, or high-sensitivity risks usually rise in priority, while residual risks should be explicitly documented rather than hidden. (NIST AI RMF 1.0, Section 1.2.3.)\n\nPrioritization also requires perspective. In many organizations, **human-facing AI risks** (e.g., hiring, lending, healthcare recommendations) often receive higher urgency than non-human-facing risks, because direct individual harms can be immediate and visible. But that does not mean the latter are unimportant; systemic harms can be severe even when less visible."
+        },
+        {
+          "type": "text",
+          "content": "The final challenge cluster in Section 1.2.4 is **Organizational Integration**. NIST is explicit that AI risk does not exist in a standalone bucket: it overlaps with enterprise risk governance, cybersecurity, privacy, compliance, and broader operational continuity. (NIST AI RMF 1.0, Section 1.2.4.)\n\nThe practical implication is that responsible AI work should not be a separate, isolated program. It should plug into existing committees, control processes, and escalation paths so that leadership sees AI risk as part of enterprise resilience rather than a disconnected technical concern."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "ranking",
+          "instruction": "You are an AI risk manager at a healthcare AI startup. Rank these risk management challenges from MOST to LEAST relevant to your context.",
+          "items": [
+            {"id": "r1", "label": "Lack of reliable metrics for measuring AI risk"},
+            {"id": "r2", "label": "Third-party software and data dependencies"},
+            {"id": "r3", "label": "Difficulty measuring risk in real-world settings vs. lab"},
+            {"id": "r4", "label": "Organizational culture not yet oriented toward AI risk"},
+            {"id": "r5", "label": "Inscrutability of AI system decision-making"}
+          ],
+          "explanation": "In healthcare, all of these are highly relevant, but inscrutability and real-world measurement challenges tend to be especially critical since clinical decisions directly affect patient outcomes. There's no single 'correct' ranking — this exercise helps you think critically about contextual prioritization."
+        }
+      ],
+      "keyTakeaways": [
+        "Section 1.2.1 shows that AI risk measurement is complicated by third-party dependencies, emergent behavior, and gaps in reliable AI-specific metrics.",
+        "Risk tolerance is not fixed: it is contextual, application-specific, and shifts with policy, norms, and organizational maturity (NIST AI RMF 1.0, Section 1.2.2).",
+        "Risk prioritization should be transparent: not all risks are equally severe, and residual risk decisions should be documented and defensible (NIST AI RMF 1.0, Section 1.2.3).",
+        "Human-facing and systemic impacts often create different urgency levels, reinforcing the need for explicit prioritization rather than purely technical scoring.",
+        "AI risk governance must integrate with enterprise risk, cybersecurity, and privacy processes to avoid siloed risk management (NIST AI RMF 1.0, Section 1.2.4)."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1187 @@
+{
+  "quizzes": {
+    "quiz-module-1": {
+      "title": "Module 1: Introduction & Framing Risk",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1-1",
+          "type": "multiple_choice",
+          "question": "How does NIST AI RMF describe risk in the context of AI systems?",
+          "options": [
+            "The combined effect of the probability of an event and the magnitude of its consequences.",
+            "Any event with legal liability or reputational impact.",
+            "Only technical model failure and no governance factor.",
+            "Only harms already observed in production."
+          ],
+          "correctIndex": 0,
+          "explanation": "This is the AI RMF framing adapted from ISO 31000:2018: risk is treated as a composite of likelihood and consequence magnitude for a given event. See NIST AI RMF 1.0 Section 1.2 and Section 1.2.1."
+        },
+        {
+          "id": "q1-2",
+          "type": "multi_select",
+          "question": "Select the three harm buckets in the NIST AI RMF harm taxonomy.",
+          "options": [
+            "Harm to People",
+            "Harm to Organizations",
+            "Harm to Ecosystems",
+            "Harm to Hardware Throughput",
+            "Harm to Marketing Spend",
+            "Harm to Data Compression"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 1.2 and Figure 1 describe the core harm classes: people, organizations, and ecosystems, with cascades across these classes."
+        },
+        {
+          "id": "q1-3",
+          "type": "multiple_choice",
+          "question": "Why is AI risk measurement especially difficult for many systems?",
+          "options": [
+            "AI systems are deterministic and therefore have no uncertainty in outcomes.",
+            "Third-party dependencies, changing deployment conditions, and hard-to-define social harms make consistent measurement difficult.",
+            "Only legal requirements are hard to identify.",
+            "Measurement is impossible unless an external auditor is involved."
+          ],
+          "correctIndex": 1,
+          "explanation": "NIST AI RMF 1.0 Section 1.2.1 highlights third-party software/data dependency risks, emergent operational behavior, and social consequences that are difficult to quantify uniformly."
+        },
+        {
+          "id": "q1-4",
+          "type": "true_false",
+          "question": "NIST AI RMF expects every AI risk to be expressible as a single precise numeric score before deployment.",
+          "correctAnswer": false,
+          "explanation": "Section 1.2.1 and 1.2.3 explicitly allow for uncertainty and unknown risks; the Framework emphasizes documented confidence and continuous measurement rather than false precision."
+        },
+        {
+          "id": "q1-5",
+          "type": "multi_select",
+          "question": "Which criteria should be considered together when assessing AI risk magnitude before prioritization?",
+          "options": [
+            "Likelihood of harm occurring",
+            "Severity or magnitude of harm",
+            "Residual risk after planned treatment",
+            "Only financial impact, excluding non-financial harms",
+            "Whether evidence is actionable for treatment owners",
+            "Number of code lines in the model implementation"
+          ],
+          "correctIndices": [0, 1, 2, 4],
+          "explanation": "Section 1.2.3 describes prioritization using likelihood and consequence, and asks teams to document residual risk and practical consequences for actions."
+        },
+        {
+          "id": "q1-6",
+          "type": "multiple_choice",
+          "question": "Which option best describes AI risk tolerance in NIST AI RMF?",
+          "options": [
+            "A static legal threshold that never changes once published.",
+            "An organization-specific readiness to accept residual risk, influenced by objectives, legal requirements, and societal context.",
+            "Only a technical parameter chosen by the model team.",
+            "A metric that is replaced weekly by arbitrary leadership preference."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 1.2.2 defines risk tolerance as context-specific and shaped by objectives, legal obligations, and changing environments rather than a fixed engineering constant."
+        },
+        {
+          "id": "q1-7",
+          "type": "multiple_choice",
+          "question": "When risk information is limited, what is the best next step for prioritization?",
+          "options": [
+            "Prioritize only risks with the lowest probability.",
+            "Prioritize high-likelihood and high-consequence risks first, while clearly documenting residual and unknown risks.",
+            "Defer all prioritization until the system reaches full scale.",
+            "Prioritize only technical model errors and ignore operational outcomes."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 1.2.3 emphasizes transparent prioritization: compare likelihood and consequence while surfacing uncertainties and residual risk so executive decisions are reviewable."
+        },
+        {
+          "id": "q1-8",
+          "type": "true_false",
+          "question": "AI risk management in NIST AI RMF should be integrated with enterprise risk, cybersecurity, and privacy programs instead of operating as a separate island.",
+          "correctAnswer": true,
+          "explanation": "Section 1.2.4 positions AI risk as an enterprise program concern that overlaps with security, privacy, and operating resilience." 
+        },
+        {
+          "id": "q1-9",
+          "type": "multi_select",
+          "question": "Which practices best demonstrate organizational integration of AI risk management?",
+          "options": [
+            "Enterprise reporting pathways into ERM/incident committees",
+            "Shared risk registers and escalation rules across teams",
+            "Regular cross-functional review of AI harm signals",
+            "Isolated AI team dashboards with no leadership visibility",
+            "Alignment with legal/compliance obligations where relevant",
+            "No formal handoff from development to operations"
+          ],
+          "correctIndices": [0, 1, 2, 4],
+          "explanation": "Section 1.2.4 and Section 1.2.3 recommend organizational integration through governance channels, cross-functional escalation, and alignment with legal/compliance contexts."
+        },
+        {
+          "id": "q1-10",
+          "type": "multiple_choice",
+          "question": "In the AI RMF introduction, what is the principal value of framing risk before method selection?",
+          "options": [
+            "It allows teams to avoid discussing trade-offs across legal and social impacts.",
+            "It ensures controls and metrics are chosen for the actual application context instead of generic convenience metrics.",
+            "It removes the need for stakeholder review because risk categories are universal.",
+            "It guarantees zero-harm outcomes without additional monitoring."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 1 framing stresses context-first risk management so that governance, measurement, and treatment address real-world impact pathways instead of abstract benchmarks."
+        }
+      ]
+    },
+    "quiz-module-2": {
+      "title": "Module 2: Framework Actors and Lifecycle",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q2-1",
+          "type": "multiple_choice",
+          "question": "How does NIST AI RMF define an AI actor?",
+          "options": [
+            "Only developers that train AI models.",
+            "Anyone with an active role in the AI system lifecycle, including deployers and operators.",
+            "Only regulators and auditors.",
+            "Only end users who consume outputs."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 2 uses an OECD-style actor model where organizations and people in active roles across lifecycle stages are treated as AI actors."
+        },
+        {
+          "id": "q2-2",
+          "type": "multi_select",
+          "question": "Which are best examples of primary audience actors in the Section 2 framework model?",
+          "options": [
+            "Persons with direct decision authority for AI deployment",
+            "Teams implementing and operating AI systems",
+            "Impacted end users with no ability to act on implementation decisions",
+            "Community groups providing lived-experience feedback only",
+            "Regulatory or advisory groups with no direct operational authority"
+          ],
+          "correctIndices": [0, 1],
+          "explanation": "Section 2 distinguishes a primary audience (direct authority and implementation power) from an informing audience that shapes expectations and input."
+        },
+        {
+          "id": "q2-3",
+          "type": "multiple_choice",
+          "question": "Which is the correct lifecycle ordering in the NIST lifecycle model used in AI RMF 1.0?",
+          "options": [
+            "Deploy, Verify, Operate, Build, Plan, Monitor",
+            "Plan and Design, Collect and Process Data, Build and Use Model, Verify and Validate, Deploy and Use, Operate and Monitor",
+            "Collect, Monitor, Deploy, Plan, Build, Verify",
+            "Build, Test, Operate, Verify, Plan, Decommission"
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 2 and Figure 2 present this six-stage lifecycle sequence to place evidence and controls at each stage."
+        },
+        {
+          "id": "q2-4",
+          "type": "true_false",
+          "question": "TEVV in NIST AI RMF is only a pre-deployment testing event and is not repeated in operation.",
+          "correctAnswer": false,
+          "explanation": "Section 2 and Appendix material describe TEVV as lifecycle-oriented, with continuous evidence generation from development through operation and revalidation." 
+        },
+        {
+          "id": "q2-5",
+          "type": "multi_select",
+          "question": "Which are the core AI lifecycle dimensions in Section 2?",
+          "options": [
+            "Application Context",
+            "Data and Input",
+            "AI Model",
+            "Task and Output",
+            "People and Planet",
+            "Supply-Chain Finance"
+          ],
+          "correctIndices": [0, 1, 2, 3, 4],
+          "explanation": "Section 2 applies these dimensions, with People and Planet as a governing perspective integrated across all stages and activities."
+        },
+        {
+          "id": "q2-6",
+          "type": "multiple_choice",
+          "question": "Which lifecycle stage is most directly associated with evaluating whether training data is representative and well governed before model training?",
+          "options": [
+            "Plan and Design",
+            "Collect and Process Data",
+            "Deploy and Use",
+            "Operate and Monitor"
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 2 places input and dataset quality work in the Collect and Process Data stage, feeding validity and fairness evidence later in TEVV and MEASURE."
+        },
+        {
+          "id": "q2-7",
+          "type": "true_false",
+          "question": "NIST AI RMF recommends diverse, cross-functional teams because they improve identification of hidden assumptions and impacted populations.",
+          "correctAnswer": true,
+          "explanation": "Section 2 and the People & Planet framing emphasize diversity to reduce blind spots in scope, data interpretation, and oversight of social effects."
+        },
+        {
+          "id": "q2-8",
+          "type": "multi_select",
+          "question": "Choose the statements that best reflect the People & Planet dimension in Section 2.",
+          "options": [
+            "It should influence decisions across all lifecycle stages, not only after deployment.",
+            "It is equivalent only to legal compliance and can be excluded in high-risk pilots.",
+            "It centers human rights, social impacts, and broader environmental consequences.",
+            "It informs question framing, prioritization, and engagement decisions.",
+            "It is a standalone concern after model validation is complete."
+          ],
+          "correctIndices": [0, 2, 3],
+          "explanation": "People & Planet is a center lens in Figure 2 and is used during planning, design, deployment, and monitoring activities (Section 2)."
+        }
+      ]
+    },
+    "quiz-module-3": {
+      "title": "Module 3: Trustworthy AI Characteristics",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q3-1",
+          "type": "multiple_choice",
+          "question": "What is the best description of trustworthiness in NIST AI RMF 1.0?",
+          "options": [
+            "A static pass/fail certification for every AI system.",
+            "A spectrum indicating how well an AI system satisfies trust-relevant qualities in context.",
+            "A measure of only model accuracy and recall.",
+            "A software quality metric independent of social context."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3 introduces trustworthiness as contextual and graded across a set of interdependent characteristics rather than a binary label."
+        },
+        {
+          "id": "q3-2",
+          "type": "multiple_choice",
+          "question": "Which statement best matches the validity/fitness-for-use idea in AI RMF?",
+          "options": [
+            "Validity is irrelevant if model accuracy is high.",
+            "Validity confirms requirements for intended use are fulfilled and context assumptions are met.",
+            "Validity means the model is robust to every possible edge case.",
+            "Validity only applies to pre-trained foundation models."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3 and NIST/ISO alignment (ISO 9000:2015 style validation) emphasize intended use and requirement fulfillment."
+        },
+        {
+          "id": "q3-3",
+          "type": "multiple_choice",
+          "question": "What does reliability in AI RMF reflect?",
+          "options": [
+            "The ability to always maximize precision regardless of input conditions.",
+            "A model's stability and expected performance consistency under stated operating conditions.",
+            "The degree to which data is encrypted in transit.",
+            "The ability to avoid all future bias findings."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3 and ISO/IEC TS 5723 link reliability to performance stability and predictability in intended conditions."
+        },
+        {
+          "id": "q3-4",
+          "type": "multiple_choice",
+          "question": "According to ISO-aligned AI RMF language, accuracy is best described as:",
+          "options": [
+            "Closeness of outputs to true or accepted values, measured in context.",
+            "Only the absence of false positives.",
+            "The speed of model inference per second.",
+            "A measure of governance maturity scores."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 3 references ISO/IEC TS 5723 definitions where accuracy is closeness to true or accepted values, and must be interpreted in context."
+        },
+        {
+          "id": "q3-5",
+          "type": "multiple_choice",
+          "question": "What does robustness/generalisability in trustworthiness testing focus on?",
+          "options": [
+            "Performance only on the same static dataset used in development.",
+            "Model behavior under distribution shift, different environments, and realistic perturbations.",
+            "Maximizing explainability while reducing all safety controls.",
+            "Only the visual appeal of model dashboards."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3.2 states that trustworthiness requires more than in-sample performance; it includes robustness and generalisability under operational variation."
+        },
+        {
+          "id": "q3-6",
+          "type": "multiple_choice",
+          "question": "Which statement matches NIST AI RMF safety expectations?",
+          "options": [
+            "AI systems should never be deployed unless perfectly robust in all conditions.",
+            "AI systems should not under defined conditions create preventable risk to humans, property, or environment.",
+            "Safety depends only on algorithmic performance, not governance.",
+            "Safety is satisfied whenever accuracy exceeds 95%."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3.2 and associated trustworthiness discussion describe safety as avoiding unsafe states for people, health, property, and the environment under defined operating conditions."
+        },
+        {
+          "id": "q3-7",
+          "type": "multiple_choice",
+          "question": "In Section 3, security in AI RMF primarily means:",
+          "options": [
+            "Confidentiality, integrity, and availability protections for AI assets and interfaces.",
+            "Only legal compliance checks for training licenses.",
+            "A single annual penetration test.",
+            "Only human review of suspicious outputs."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 3.3 treats security as broader system protection across model, data, and infrastructure to preserve confidentiality, integrity, and availability."
+        },
+        {
+          "id": "q3-8",
+          "type": "multiple_choice",
+          "question": "What is resilience in the AI RMF context?",
+          "options": [
+            "A goal of graceful degradation and recovery when conditions change or attacks occur.",
+            "The same as avoiding all incidents.",
+            "Only the speed of fallback workflows.",
+            "A software term unrelated to AI governance."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 3.3 aligns security with resilience, requiring systems to withstand adverse events and degrade safely while maintaining function where possible."
+        },
+        {
+          "id": "q3-9",
+          "type": "multiple_choice",
+          "question": "Which is the strongest interpretation of privacy (AI) in the framework context?",
+          "options": [
+            "Privacy is solely a legal disclosure requirement.",
+            "Privacy protects autonomy, identity, and dignity by controlling observation and consent in AI-enabled contexts.",
+            "Privacy can be deferred to post-deployment data retention.",
+            "Privacy is only relevant for consumer products."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3.6 discusses privacy in relation to autonomy, identity, and dignity, consistent with broader NIST privacy principles."
+        },
+        {
+          "id": "q3-10",
+          "type": "multiple_choice",
+          "question": "How is accountability typically treated in AI RMF trustworthiness?",
+          "options": [
+            "As a purely legal document separate from technical performance.",
+            "As an operational property tied to governance, role clarity, and traceable decision processes.",
+            "As automatic whenever explainability is high.",
+            "As irrelevant for model-centric systems."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3.4 links accountability and transparency to documentation, role clarity, and auditable decision trails."
+        },
+        {
+          "id": "q3-11",
+          "type": "multiple_choice",
+          "question": "Which answer best distinguishes explainability and interpretability?",
+          "options": [
+            "Explainability is output-level communication; interpretability is meaningful understanding of internal mechanisms in context.",
+            "They are identical terms.",
+            "Interpretability applies only to human reviewers; explainability only to regulators.",
+            "Explainability is about governance and interpretability is about cost."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 3.5 differentiates them: explainability concerns representations of output behavior, while interpretability concerns meaningful causal/contextual understanding."
+        },
+        {
+          "id": "q3-12",
+          "type": "multiple_choice",
+          "question": "Fairness in NIST AI RMF is best described as:",
+          "options": [
+            "A single numerical parity metric that is always sufficient across all contexts.",
+            "Concern for equality/equity by limiting unjustified disadvantage and handling discrimination risk across populations.",
+            "A technical side issue not tied to governance.",
+            "The inverse of accuracy."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3.7 frames fairness as concern for unjustified unequal impact and bias. Definitions and thresholds remain context sensitive."
+        },
+        {
+          "id": "q3-13",
+          "type": "multi_select",
+          "question": "Select the bias types identified in NIST AI RMF 1.0.",
+          "options": [
+            "Systemic Bias",
+            "Computational and Statistical Bias",
+            "Human-Cognitive Bias",
+            "Infrastructure Latency Bias",
+            "Deployment Environment Bias"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 3.7 explicitly identifies these three bias families: systemic, computational/statistical, and human-cognitive, each with distinct points of control."
+        },
+        {
+          "id": "q3-14",
+          "type": "true_false",
+          "question": "Tradeoffs in AI RMF trustworthiness are expected; improving one characteristic may require compensating controls in others.",
+          "correctAnswer": true,
+          "explanation": "Section 3 and related guidance emphasize balancing characteristics (e.g., performance, explainability, privacy, fairness) and documenting defensible tradeoffs rather than optimizing a single metric in isolation."
+        },
+        {
+          "id": "q3-15",
+          "type": "multiple_choice",
+          "question": "In an AI healthcare case, which control combination aligns with tradeoff management guidance?",
+          "options": [
+            "Maximize model opacity and ignore human review because it improves utility.",
+            "Increase explainability and human escalation for high-risk decisions, while reviewing privacy and fairness impacts through TEVV and MEASURE updates.",
+            "Disable all monitoring to reduce overhead after deployment.",
+            "Rely only on accuracy; fairness and robustness checks can be postponed indefinitely."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 3 and Sections 3.2–3.7 support balancing trustworthiness characteristics with human oversight and ongoing MEASURE updates for high-impact settings."
+        }
+      ]
+    },
+    "quiz-module-4": {
+      "title": "Module 4: GOVERN",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q4-1",
+          "type": "multiple_choice",
+          "question": "What is the core purpose of GOVERN in the AI RMF?",
+          "options": [
+            "A post-deployment reporting form only.",
+            "The organizational layer that defines roles, policies, culture, and accountability across the lifecycle.",
+            "A model fine-tuning protocol for high-performance systems.",
+            "A cybersecurity tool for cloud access control."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.1 positions GOVERN as cross-cutting organizational practice; it shapes all other functions rather than acting as an afterthought artifact."
+        },
+        {
+          "id": "q4-2",
+          "type": "multi_select",
+          "question": "Which are core parts of GOVERN 1 implementation?",
+          "options": [
+            "Document legal and regulatory requirements before hardening deployment timing.",
+            "Embed trustworthy AI expectations in policies.",
+            "Use one static risk tolerance and never revisit it.",
+            "Define transparent governance processes and monitoring cadence.",
+            "Plan for periodic review and inventory coverage.",
+            "Exclude decommissioning from policy scope"
+          ],
+          "correctIndices": [0, 1, 3, 4],
+          "explanation": "Section 5.1 GOVERN 1.1–1.7 includes legal baseline, policy integration, risk tolerance processes, transparent processes, monitoring, inventories, and decommission planning."
+        },
+        {
+          "id": "q4-3",
+          "type": "multiple_choice",
+          "question": "Which statement correctly represents GOVERN 1.5–1.7 practices?",
+          "options": [
+            "Monitor and review as a periodic function tied to risk changes and operational feedback.",
+            "Conduct a single governance review before launch and close the file forever.",
+            "Ignore system retirement because model retirement is an engineering decision only.",
+            "Inventorying systems and decommissioning are optional add-ons."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 5.1 says governance and monitoring are continuous; governance artifacts should include inventory and decommission triggers over the lifecycle."
+        },
+        {
+          "id": "q4-4",
+          "type": "true_false",
+          "question": "Documenting AI risk management processes and escalation routes is required only after a model has already caused harm.",
+          "correctAnswer": false,
+          "explanation": "GOVERN 1.4 expects transparent and auditable process documentation before and during deployment decisions so teams have shared decision logic and ownership from the start."
+        },
+        {
+          "id": "q4-5",
+          "type": "multi_select",
+          "question": "Which are elements of GOVERN 2 (Accountability)?",
+          "options": [
+            "Document lifecycle roles and responsibilities.",
+            "Provide AI risk management training for relevant staff.",
+            "Require executive leadership accountability for outcomes.",
+            "Run model training with no policy owner.",
+            "Assign one person only at final review and no earlier owners.",
+            "Avoid performance and harm reporting metrics in leadership reviews"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 5.1 GOVERN 2.1–2.3 requires roles, training, and visible executive accountability for AI risk decisions and outcomes."
+        },
+        {
+          "id": "q4-6",
+          "type": "multiple_choice",
+          "question": "What is a direct benefit of GOVERN 2.3 leadership accountability?",
+          "options": [
+            "It can normalize under-reporting risk signals because leadership owns less.",
+            "It improves escalation speed, budget prioritization, and treatment confidence because ownership is explicit.",
+            "It removes the need for technical teams to own controls.",
+            "It reduces the need for stakeholder communication."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.1 ties executive ownership to faster escalation and resourced risk responses, especially for high-impact systems."
+        },
+        {
+          "id": "q4-7",
+          "type": "true_false",
+          "question": "A diverse decision-making team is required as a DEI governance practice in NIST AI RMF GOVERN 3.",
+          "correctAnswer": true,
+          "explanation": "Section 5.1 GOVERN 3.1 requires diverse teams, and this is designed to surface perspective gaps that could become systemic and fairness-related harms."
+        },
+        {
+          "id": "q4-8",
+          "type": "multi_select",
+          "question": "Select what best describes GOVERN 3 practices.",
+          "options": [
+            "Diverse decision-making teams across functional and social perspectives.",
+            "Documented human-AI oversight and override expectations.",
+            "No limits on autonomous operation in high-risk settings.",
+            "One technical lead decides without governance challenge pathways.",
+            "Escalation paths for contested AI outputs."
+          ],
+          "correctIndices": [0, 1, 4],
+          "explanation": "Section 5.1 GOVERN 3.1–3.2 establishes diversity and oversight requirements, including escalation and bounded autonomy in high-impact workflows."
+        },
+        {
+          "id": "q4-9",
+          "type": "multiple_choice",
+          "question": "Which outcome best matches an effective GOVERN 3.2 policy?",
+          "options": [
+            "Humans are never informed when AI made a recommendation.",
+            "Clear human-AI oversight boundaries and escalation paths for review or override.",
+            "Unlimited automation with hidden override rights only for vendors.",
+            "Oversight deferred indefinitely until model drift is detected."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.1 GOVERN 3.2 is about practical oversight policy design, including limits and decision authority for AI-supported workflows."
+        },
+        {
+          "id": "q4-10",
+          "type": "multiple_choice",
+          "question": "What best reflects GOVERN 4 (risk-aware culture and engagement)?",
+          "options": [
+            "Cultivate open reporting, learning routines, and documented incident reflection.",
+            "Punish all teams that raise weak signals.",
+            "Publish only technical metrics with no context to stakeholders.",
+            "Treat engagement as a one-time PR activity at launch only."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 5.1 GOVERN 4.1–4.3 supports continuous safety culture, documentation habits, and practical engagement patterns for trust recovery and learning." 
+        },
+        {
+          "id": "q4-11",
+          "type": "multiple_choice",
+          "question": "Which action is most aligned with GOVERN 5 (stakeholder engagement)?",
+          "options": [
+            "Identify affected users, providers, impacted communities, and regulators early and set feedback loops.",
+            "Rely on internal teams only and omit user-facing channels.",
+            "Only monitor social sentiment after incidents occur.",
+            "Publish model outputs only to executives."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 5.1 GOVERN 5 describes mapping, engaging, and improving engagement over time for impacted and informed actors."
+        },
+        {
+          "id": "q4-12",
+          "type": "multi_select",
+          "question": "Select key elements of GOVERN 6 (third-party / supply chain governance).",
+          "options": [
+            "Track external providers, data licenses, and model provenance.",
+            "Create monitoring and update review obligations for vendor changes.",
+            "Ignore contractual terms to preserve deployment speed.",
+            "Define escalation and continuity expectations before dependence increases.",
+            "Treat third-party systems as fully equivalent to internal systems without controls."
+          ],
+          "correctIndices": [0, 1, 3],
+          "explanation": "Section 5.1 GOVERN 6 emphasizes external actor control through contracts, provenance tracking, and clear continuity and escalation requirements."
+        }
+      ]
+    },
+    "quiz-module-5": {
+      "title": "Module 5: MAP",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q5-1",
+          "type": "true_false",
+          "question": "MAP is a pre-implementation and context-first function; it should be completed before go/no-go decisions are finalized.",
+          "correctAnswer": true,
+          "explanation": "Section 5.2 frames MAP as the context establishment function that informs deployment readiness and treatment planning."
+        },
+        {
+          "id": "q5-2",
+          "type": "multi_select",
+          "question": "Which belong to MAP 1 context establishment?",
+          "options": [
+            "Intended purpose and business objectives",
+            "User groups and operational setting",
+            "Deployment constraints and legal obligations",
+            "Only software runtime version",
+            "Risk tolerance and priority criteria",
+            "Marketing messaging for the product launch"
+          ],
+          "correctIndices": [0, 1, 2, 4],
+          "explanation": "Section 5.2 describes MAP 1 as context-setting: purpose, users, boundaries, and legal/regulatory context before technical decisions harden."
+        },
+        {
+          "id": "q5-3",
+          "type": "multiple_choice",
+          "question": "Why is a documented MAP context useful for MAP 1.6?",
+          "options": [
+            "It captures assumptions and constraints needed for future evidence collection and review.",
+            "It removes the need for model risk testing.",
+            "It locks all change requests for the life of the system.",
+            "It replaces stakeholder review."
+          ],
+          "correctIndex": 0,
+          "explanation": "MAP 1.6 requires documenting contextual assumptions and constraints so MEASURE and MANAGE can test and challenge them later."
+        },
+        {
+          "id": "q5-4",
+          "type": "multiple_choice",
+          "question": "MAP 2.1 focuses on what?",
+          "options": [
+            "Deployment cost only.",
+            "System type and AI modality, such as classifier, recommender, optimizer, or generative model.",
+            "Only cloud infrastructure naming conventions.",
+            "End-user training only."
+          ],
+          "correctIndex": 1,
+          "explanation": "MAP 2 establishes the technical categorization of the AI system so controls map to actual model type and function."
+        },
+        {
+          "id": "q5-5",
+          "type": "multi_select",
+          "question": "Which items are part of MAP 2.2 technical context in Section 5.2?",
+          "options": [
+            "Input data provenance and sensitivity",
+            "Representativeness and known limitations",
+            "Operational interaction pattern expectations",
+            "Annual revenue targets only",
+            "Model update strategy",
+            "Color palette of the dashboard UI"
+          ],
+          "correctIndices": [0, 1, 4],
+          "explanation": "MAP 2 extends beyond model label into data provenance, representativeness, and operating assumptions that impact trustworthiness risk."
+        },
+        {
+          "id": "q5-6",
+          "type": "multiple_choice",
+          "question": "MAP 3.1–3.5 mainly addresses:",
+          "options": [
+            "Only software architecture diagrams.",
+            "How the system is used, who is impacted, automation level, and oversight/supervision boundaries.",
+            "Only pricing and procurement decisions.",
+            "Only third-party contract language."
+          ],
+          "correctIndex": 1,
+          "explanation": "MAP 3 translates the technical and organizational context into real use design, including people-facing workflows and intervention pathways."
+        },
+        {
+          "id": "q5-7",
+          "type": "true_false",
+          "question": "A MAP 3.5-style deployment should include defined human oversight and override procedures for high-stakes decisions.",
+          "correctAnswer": true,
+          "explanation": "Section 5.2 ties governance outcomes in MAP to practical oversight and escalation expectations before and during deployment."
+        },
+        {
+          "id": "q5-8",
+          "type": "multiple_choice",
+          "question": "Which is the primary purpose of MAP 4 in the governance flow?",
+          "options": [
+            "To catalog external dependencies, IP, and contractual risk points.",
+            "To replace technical testing for external services.",
+            "To measure only model latency in production.",
+            "To classify marketing segments."
+          ],
+          "correctIndex": 0,
+          "explanation": "MAP 4 makes third-party context explicit: external components can shift risk posture through licensing, provenance, and update behavior."
+        },
+        {
+          "id": "q5-9",
+          "type": "multiple_choice",
+          "question": "In MAP 5, what is the primary purpose of impact characterization?",
+          "options": [
+            "Rate possible harms by likelihood and magnitude across people, organization, and broader social impacts.",
+            "Eliminate all non-technical risks without evidence.",
+            "Prioritize only costs and uptime.",
+            "Delay all decisions until after first incident."
+          ],
+          "correctIndex": 0,
+          "explanation": "MAP 5 (Section 5.2) requires explicit characterization of negative and positive outcomes to drive treatment planning and measurement priorities."
+        },
+        {
+          "id": "q5-10",
+          "type": "multiple_choice",
+          "question": "For a go/no-go deployment call, which condition should stop deployment under MAP guidance?",
+          "options": [
+            "High residual risk remains above tolerance without compensating controls or acceptable decision by leadership.",
+            "Any technical warning flag exists, regardless of severity.",
+            "A competitor has a stronger product in market."
+          ],
+          "correctIndex": 0,
+          "explanation": "MAP output should inform decision gates. If risk tolerance thresholds are not met, Section 5.2 directs teams to revise, constrain, or pause before deployment." 
+        }
+      ]
+    },
+    "quiz-module-6": {
+      "title": "Module 6: MEASURE",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q6-1",
+          "type": "multiple_choice",
+          "question": "What is the core requirement of MEASURE 1.1?",
+          "options": [
+            "Collect metrics that match context-specific objectives and trustworthiness outcomes.",
+            "Use only internal metrics from the model training platform.",
+            "Measure only once before launch.",
+            "Report metrics only when incidents occur."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 5.3 requires metric selection that is directly tied to deployment context and mapped risks, not convenience metrics."
+        },
+        {
+          "id": "q6-2",
+          "type": "multiple_choice",
+          "question": "MEASURE 1.2 mainly requires:",
+          "options": [
+            "A one-time annual report.",
+            "Defined schedules and cadences for repeated measurement and reassessment.",
+            "Random testing after complaints only.",
+            "No cadence as long as governance exists."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.3 and MEASURE design expect regular intervals, event-based checks, and lifecycle-aligned measurement windows."
+        },
+        {
+          "id": "q6-3",
+          "type": "true_false",
+          "question": "MEASURE 1.3 expects independent assessment or challenge capacity, not only internal self-validation.",
+          "correctAnswer": true,
+          "explanation": "Section 5.3 indicates independent review and quality control improve credibility of measurement outputs and reduce confirmation bias."
+        },
+        {
+          "id": "q6-4",
+          "type": "multi_select",
+          "question": "Which are part of MEASURE 2 evidence across lifecycle stages?",
+          "options": [
+            "Test documentation and reproducibility",
+            "Human subject evaluations where decisions affect people",
+            "Representative operational scenario testing",
+            "Monitoring plans for drift and degradation",
+            "Ignoring integration and deployment edge cases",
+            "Random output screenshots"
+          ],
+          "correctIndices": [0, 1, 2, 3],
+          "explanation": "MEASURE 2.1–2.4 requires structured testing artifacts, human-centered evaluation, representative scenarios, and post-deployment monitoring/detection plans."
+        },
+        {
+          "id": "q6-5",
+          "type": "multi_select",
+          "question": "MEASURE 2.5 and 2.6 focus on which trustworthiness lines of evidence?",
+          "options": [
+            "Validity demonstrations for intended use",
+            "Reliability under stated operating conditions",
+            "User interface color contrast",
+            "Supply-chain lead time",
+            "General business forecasting"
+          ],
+          "correctIndices": [0, 1],
+          "explanation": "Section 5.3 links MEASURE 2.5/2.6 to demonstrating validity and reliability evidence before and after deployment."
+        },
+        {
+          "id": "q6-6",
+          "type": "multiple_choice",
+          "question": "MEASURE 2.7 is primarily about what?",
+          "options": [
+            "Safety checks that include misuse conditions and failure-consequence consequences.",
+            "Only model latency under ideal conditions.",
+            "Code readability metrics.",
+            "Brand sentiment only."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 5.3 and Section 3 safety concepts drive MEASURE 2.7 toward safety-focused testing beyond pure prediction quality."
+        },
+        {
+          "id": "q6-7",
+          "type": "multiple_choice",
+          "question": "MEASURE 2.8 primarily assesses:",
+          "options": [
+            "Security posture and resilience under threat, adversarial, and disruption scenarios.",
+            "Only the number of training epochs.",
+            "UI responsiveness of dashboards only.",
+            "End-user preference surveys only."
+          ],
+          "correctIndex": 0,
+          "explanation": "MEASURE 2.8 covers security and resilience evidence such as attack resistance, model/data pipeline risk, and containment planning."
+        },
+        {
+          "id": "q6-8",
+          "type": "multiple_choice",
+          "question": "Which is best described by MEASURE 2.9?",
+          "options": [
+            "Transparency and accountability review of behavior traces, documentation, and decision pathways.",
+            "Model compression benchmarking only.",
+            "Cloud pricing analysis.",
+            "Brand campaign effectiveness."
+          ],
+          "correctIndex": 0,
+          "explanation": "MEASURE 2.9 checks whether governance and technical records support explanation and accountability for contested outcomes."
+        },
+        {
+          "id": "q6-9",
+          "type": "multi_select",
+          "question": "Which are MEASURE 2.10, 2.11, and 2.12 activities?",
+          "options": [
+            "Explainability and interpretation validation with user-facing evidence",
+            "Privacy risk evaluations and reduction techniques",
+            "Bias and fairness assessments at scale",
+            "Sales team commission calculations",
+            "Color contrast checks in model outputs"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 5.3 states 2.10–2.12 assess explanation quality, privacy risks, and large-scale bias/fairness performance."
+        },
+        {
+          "id": "q6-10",
+          "type": "multiple_choice",
+          "question": "MEASURE 2.13 includes which additional risk lens?",
+          "options": [
+            "Environmental and social consequence review, plus TEVV effectiveness over time.",
+            "Only code coverage and runtime complexity.",
+            "Marketing conversion rate only.",
+            "None; 2.13 is not part of AI RMF."
+          ],
+          "correctIndex": 0,
+          "explanation": "Section 5.3 references social/environmental consequence review and continuous assurance quality as part of the later MEASURE evidence set."
+        },
+        {
+          "id": "q6-11",
+          "type": "multiple_choice",
+          "question": "MEASURE 3.1 is best described as:",
+          "options": [
+            "A static snapshot process at launch only.",
+            "Longitudinal tracking of metrics to detect change, trend, and material drift.",
+            "A legal-only review independent of metrics.",
+            "An optional research activity after retirement."
+          ],
+          "correctIndex": 1,
+          "explanation": "MEASURE 3.1 in Section 5.3 requires temporal tracking with thresholds and evidence of worsening or improvement."
+        },
+        {
+          "id": "q6-12",
+          "type": "multiple_choice",
+          "question": "Which combination best matches MEASURE 3.2 and MEASURE 4 actions?",
+          "options": [
+            "Track hard-to-measure risks through proxies and domain expert review, then validate and adjust metrics by context with documented learning actions.",
+            "Collect feedback only for high-visibility incidents.",
+            "Use one fixed threshold for all systems and contexts.",
+            "Avoid changing metrics once a system launches."
+          ],
+          "correctIndex": 0,
+          "explanation": "MEASURE 3.2 and 4.1–4.3 require capturing subtle risks, using expert review, and assessing whether measurement remains meaningful in actual context with documented improvements."
+        }
+      ]
+    },
+    "quiz-module-7": {
+      "title": "Module 7: MANAGE",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q7-1",
+          "type": "multiple_choice",
+          "question": "What is the main purpose of MANAGE 1.1?",
+          "options": [
+            "Select model architecture for highest inference speed.",
+            "Determine post-measurement treatment direction, including readiness or suspension decisions.",
+            "Document only incident response contacts.",
+            "Replace MAP and MEASURE outputs with ad hoc rules."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.4 states MANAGE begins by translating evidence into readiness and treatment choices, including go/no-go outcomes where appropriate."
+        },
+        {
+          "id": "q7-2",
+          "type": "multi_select",
+          "question": "What factors align with MANAGE 1.2 risk prioritization?",
+          "options": [
+            "Impact level and likelihood",
+            "Urgency based on stakeholder exposure",
+            "Residual risk after planned control options",
+            "Model confidence that cannot be explained by data volume",
+            "Whether leadership has already been informed"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 5.4 highlights prioritization by likelihood, consequence, urgency, and residual exposure, not model confidence alone."
+        },
+        {
+          "id": "q7-3",
+          "type": "multiple_choice",
+          "question": "Which response strategy is most appropriate for an immediate high-likelihood, high-impact harm that cannot be reduced within tolerance quickly?",
+          "options": [
+            "Ignore and continue operation while collecting more data.",
+            "Avoid deployment in current form and implement compensating controls before restart.",
+            "Accept residual risk silently and document only at year end.",
+            "Transfer all risk to customers through fine print only."
+          ],
+          "correctIndex": 1,
+          "explanation": "MANAGE 1.3 treatment planning and MANAGE 2.4 disengagement logic support temporary or temporary suspension paths when treatment cannot be achieved quickly."
+        },
+        {
+          "id": "q7-4",
+          "type": "multi_select",
+          "question": "Select correct pairings for MANAGE treatment options.",
+          "options": [
+            "Mitigate: add controls or redesign workflows.",
+            "Transfer: move residual risk via contracts, insurance, or shared responsibility.",
+            "Avoid: remove or significantly scope the AI function.",
+            "Accept: document residual risk with rationale and monitoring plan.",
+            "Eliminate all uncertainty by deleting data."
+          ],
+          "correctIndices": [0, 1, 2, 3],
+          "explanation": "Section 5.4 and MANAGE 2 describe mitigation, transfer, avoidance, and acceptance as explicit treatment pathways with documented rationale and residual exposure."
+        },
+        {
+          "id": "q7-5",
+          "type": "multiple_choice",
+          "question": "Which is the best MANAGE 2.1 use case?",
+          "options": [
+            "Replacing an unsafe automated step with a human-only process where automation risk is too high.",
+            "Forcing full automation with no fallback path.",
+            "Ignoring business needs to preserve model precision.",
+            "Removing all controls after deployment once metrics improve."
+          ],
+          "correctIndex": 0,
+          "explanation": "MANAGE 2 includes non-AI alternatives and control substitutions when treatment goals are better met by reducing automation exposure."
+        },
+        {
+          "id": "q7-6",
+          "type": "true_false",
+          "question": "MANAGE requires residual risk to be documented before a system is considered in steady-state operation.",
+          "correctAnswer": true,
+          "explanation": "MANAGE 1.4 requires residual risks to be explicitly recorded and approved, supporting decision transparency and incident defensibility."
+        },
+        {
+          "id": "q7-7",
+          "type": "multiple_choice",
+          "question": "How does MANAGE 3 treat pre-trained model updates?",
+          "options": [
+            "They are outside AI governance since they are vendor-owned.",
+            "Establish ongoing controls for model updates, provenance checks, and impact verification after vendor changes.",
+            "Only log the initial model download and never revisit.",
+            "Allow automatic updates without user notice to reduce delay."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.4 requires lifecycle maintenance and pre-trained model oversight, including change review and ongoing risk response."
+        },
+        {
+          "id": "q7-8",
+          "type": "true_false",
+          "question": "MANAGE 3 implies that third-party risk should be monitored only at initial procurement, not during operations.",
+          "correctAnswer": false,
+          "explanation": "Section 5.4 repeatedly links MANAGE monitoring to ongoing operations, including third-party components and update behavior across time."
+        },
+        {
+          "id": "q7-9",
+          "type": "multiple_choice",
+          "question": "Which action is most aligned with MANAGE 4.2 and 4.3 during an incident?",
+          "options": [
+            "Trigger internal verification checkpoints and communicate to affected teams and stakeholders quickly.",
+            "Pause reporting until executive approval is final by month-end.",
+            "Use silent hotfixes without documentation.",
+            "Only monitor model scores and avoid informing impacted communities."
+          ],
+          "correctIndex": 0,
+          "explanation": "MANAGE 4 focuses on post-deployment monitoring and incident response; verified checkpoints and communication are central in Section 5.4."
+        },
+        {
+          "id": "q7-10",
+          "type": "multiple_choice",
+          "question": "A system is being decommissioned. What is the correct MANAGE-aligned step?",
+          "options": [
+            "Preserve access credentials indefinitely for convenience.",
+            "Revoke access, archive evidence, notify stakeholders, and transfer legacy records as required.",
+            "Ignore data retention and retention controls because the system is no longer in use.",
+            "Continue partial inference to test hidden issues before full removal."
+          ],
+          "correctIndex": 1,
+          "explanation": "Although decommissioning details are set in governance (GOVERN 1.7), MANAGE execution should include safe transition, evidence archival, and stakeholder communication."
+        }
+      ]
+    },
+    "quiz-module-8": {
+      "title": "Module 8: Cumulative Final Exam",
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q8-1",
+          "type": "true_false",
+          "question": "A Current Profile is a description of how an AI system is currently managed, while a Target Profile is the desired future outcomes and risk posture.",
+          "correctAnswer": true,
+          "explanation": "NIST AI RMF Section 6 defines Current and Target Profiles for gap and roadmap planning." 
+        },
+        {
+          "id": "q8-2",
+          "type": "multi_select",
+          "question": "Select the correct elements of profile-based planning in AI RMF.",
+          "options": [
+            "Align outcomes to organizational context and risk tolerance.",
+            "Use governance, MAP, MEASURE, MANAGE artifacts to describe target gaps.",
+            "Define both people/organizational and technical requirements.",
+            "Never involve stakeholders because profiles are internal only.",
+            "Only track model performance scores, no governance actions."
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 6 explains profiles as implementation views of the four core functions with explicit outcomes and prioritized actions."
+        },
+        {
+          "id": "q8-3",
+          "type": "multiple_choice",
+          "question": "Compared with traditional software risk models, what is a core AI RMF distinction?",
+          "options": [
+            "AI RMF removes the need for any requirement engineering.",
+            "AI RMF emphasizes dynamic risk, data/model provenance, and societal impact pathways in addition to technical defects.",
+            "Traditional software never has lifecycle risk.",
+            "AI RMF assumes technical quality is the only risk dimension."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 1 and Sections 2–6 stress context, lifecycle evidence, and impact breadth that often exceed traditional software defect models." 
+        },
+        {
+          "id": "q8-4",
+          "type": "multiple_choice",
+          "question": "Which statement best reflects People & Planet concerns in deployment planning?",
+          "options": [
+            "They can be handled by post-hoc PR updates only.",
+            "They require ongoing governance input across stages and should shape design, validation, and escalation.",
+            "They are limited to marketing claims.",
+            "They only matter if legal action is pending."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 2 frames People & Planet as a center perspective that affects design, risk priorities, and response pathways."
+        },
+        {
+          "id": "q8-5",
+          "type": "multiple_choice",
+          "question": "In a credit scoring deployment, what human-AI interaction pattern is most consistent with trustworthy practice?",
+          "options": [
+            "No human visibility once the AI outputs a score.",
+            "Automated scores with clear escalation, override, and appeal mechanisms when adverse outcomes occur.",
+            "No appeal to avoid reputational risk",
+            "Only aggregate explanations without individual context"
+          ],
+          "correctIndex": 1,
+          "explanation": "Both Module 2 lifecycle and Modules 4/7 support meaningful human oversight, appeal routes, and bounded automation for high-impact systems."
+        },
+        {
+          "id": "q8-6",
+          "type": "multi_select",
+          "question": "Select AI RMF attributes or outcomes that should be balanced in a deployment plan.",
+          "options": [
+            "Validity and reliability",
+            "Safety and privacy",
+            "Transparency and accountability",
+            "Aesthetic quality of the output UI",
+            "Cost only"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 3 and appendices emphasize balancing trustworthiness characteristics through governance tradeoffs and evidence-backed choices."
+        },
+        {
+          "id": "q8-7",
+          "type": "multiple_choice",
+          "question": "Cross-functional integration in the AI RMF means:",
+          "options": [
+            "GOVERN, MAP, MEASURE, and MANAGE are independent but unshared.",
+            "Insights and decisions from governance, context, measurement, and treatment are sequenced and traced through one workflow.",
+            "Only cybersecurity teams need to run AI RMF.",
+            "MAP and MEASURE can be omitted for low-risk systems."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5 demonstrates a chain model where each function depends on the previous function outputs and informs the next." 
+        },
+        {
+          "id": "q8-8",
+          "type": "true_false",
+          "question": "A valid go/no-go decision can only use technical metrics and ignore legal, social, and operational context.",
+          "correctAnswer": false,
+          "explanation": "Section 5.2 and Section 1.2.2 require combining MAP context, legal/regulatory constraints, and risk tolerance in go/no-go decisions." 
+        },
+        {
+          "id": "q8-9",
+          "type": "multiple_choice",
+          "question": "A strong post-incident improvement loop should include:",
+          "options": [
+            "Update MAP assumptions, MEASURE indicators, and MANAGE treatment priorities with leadership and owner updates.",
+            "No changes unless another incident happens.",
+            "Remove all documentation to reduce overhead.",
+            "Stop using TEVV because impact already observed"
+          ],
+          "correctIndex": 0,
+          "explanation": "Sections 5.3 and 5.4 describe closed-loop updates across functions for evidence-driven improvement."
+        },
+        {
+          "id": "q8-10",
+          "type": "multiple_choice",
+          "question": "Which option best matches MEASURE 3 and MEASURE 4 use in operations?",
+          "options": [
+            "Track trends, capture user feedback, and validate whether metrics remain meaningful in context.",
+            "Collect only pre-launch metrics and archive them.",
+            "Use only qualitative reviews once per year.",
+            "Ignore hard-to-measure risks because they are difficult."
+          ],
+          "correctIndex": 0,
+          "explanation": "MEASURE 3 and 4 require longitudinal monitoring, end-user feedback, expert/context validation, and documented learning actions." 
+        },
+        {
+          "id": "q8-11",
+          "type": "multiple_choice",
+          "question": "In a multinational rollout, cross-function alignment is most important for:",
+          "options": [
+            "Color-coded dashboards for each country.",
+            "Consistent policy language with local risk tolerance, legal, and operational adjustments per profile.",
+            "Single global model with no context changes.",
+            "No external stakeholder visibility to avoid delays."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 6 and module 7 examples emphasize harmonized frameworks with local adaptation through profiles and governance ownership." 
+        },
+        {
+          "id": "q8-12",
+          "type": "multiple_choice",
+          "question": "How should organizations handle third-party model updates in high-dependence AI systems?",
+          "options": [
+            "Treat updates as non-events if vendor reputation is strong.",
+            "Integrate provider-change monitoring into governance and management and re-run relevant MEASURE checks.",
+            "Disable all reporting when vendor updates occur.",
+            "Rely on historical metrics indefinitely."
+          ],
+          "correctIndex": 1,
+          "explanation": "Section 5.4 MANAGE 3 and GOVERN 6 together require ongoing third-party monitoring and revalidation after dependency changes."
+        },
+        {
+          "id": "q8-13",
+          "type": "true_false",
+          "question": "Decommissioning decisions are outside AI RMF scope once a model is formally retired.",
+          "correctAnswer": false,
+          "explanation": "The framework emphasizes governance over lifecycle boundaries; decommissioning affects residual risk, data handling, and stakeholder communication."
+        },
+        {
+          "id": "q8-14",
+          "type": "multi_select",
+          "question": "For profile-based decisioning, which should be part of the target state roadmap?",
+          "options": [
+            "Clear criteria for residual risk acceptance",
+            "Escalation and incident communication pathways",
+            "Integrated trustworthiness testing aligned by function",
+            "One-time launch checklist only",
+            "No change from current systems unless forced"
+          ],
+          "correctIndices": [0, 1, 2],
+          "explanation": "Section 6 profiles are meaningful only when they encode how gaps are closed across GOVERN, MAP, MEASURE, and MANAGE."
+        },
+        {
+          "id": "q8-15",
+          "type": "multiple_choice",
+          "question": "A mature AI RMF implementation most directly demonstrates:",
+          "options": [
+            "Isolated teams with strong individual metrics only.",
+            "Cross-functional traceability from context to measurement to treatment with documented governance decisions.",
+            "Maximum feature deployment speed with no pause conditions.",
+            "No dependence on stakeholder input." 
+          ],
+          "correctIndex": 1,
+          "explanation": "The integrated function model across Sections 5.1–5.4 is designed to produce auditable links among governance, context, evidence, and remediation."
+        }
+      ]
+    }
+  }
+}

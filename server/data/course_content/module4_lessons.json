@@ -1,0 +1,120 @@
+{
+  "lessons": [
+    {
+      "id": "m4-govern-overview",
+      "moduleId": "module-4",
+      "title": "GOVERN Overview",
+      "sections": [
+        {
+          "type": "text",
+          "content": "The GOVERN function defines the operating model for AI risk management. It establishes accountability, policies, and oversight rhythms that make MAP, MEASURE, and MANAGE executable in daily work."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "Why GOVERN matters",
+          "content": "Without role clarity and governance cadence, risk controls stay informal and inconsistent."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "core-functions",
+          "caption": "GOVERN connects strategy to risk execution across all core functions."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "checklist",
+          "instruction": "Select the governance controls your team already uses.",
+          "items": [
+            { "id": "g1", "label": "Documented AI policy and procedure set" },
+            { "id": "g2", "label": "Named AI risk owner and escalation backup" },
+            { "id": "g3", "label": "Quarterly risk review with leadership" },
+            { "id": "g4", "label": "Third-party AI risk evaluation process" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m4-policy-worksheet",
+      "moduleId": "module-4",
+      "title": "Policy and Accountability Worksheet",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Translate governance intent into concrete assignments. Identify owners, review frequency, and decision thresholds for material AI risks."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "worksheet",
+          "prompt": "Draft a lightweight governance charter for one AI system.",
+          "fields": [
+            {
+              "id": "owner",
+              "label": "Primary accountable owner",
+              "placeholder": "Role or team name"
+            },
+            {
+              "id": "escalation",
+              "label": "Escalation trigger",
+              "placeholder": "What event requires leadership review?"
+            },
+            {
+              "id": "evidence",
+              "label": "Evidence required for go/no-go",
+              "placeholder": "What proof must exist before release?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m4-escalation-decision",
+      "moduleId": "module-4",
+      "title": "Escalation Decision Tree",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Use a repeatable triage flow when risk signals appear in production."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "decisionTree",
+          "prompt": "Choose the best action path for a model drift alert in a high-impact workflow.",
+          "startNodeId": "n1",
+          "nodes": [
+            {
+              "id": "n1",
+              "prompt": "A model drift alert exceeds tolerance. What first?",
+              "choices": [
+                {
+                  "label": "Open incident ticket and notify governance owner",
+                  "nextNodeId": "n2"
+                },
+                {
+                  "label": "Ignore until customer complaints increase",
+                  "result": "needs_improvement",
+                  "feedback": "Delayed response increases harm exposure and weakens accountability."
+                }
+              ]
+            },
+            {
+              "id": "n2",
+              "prompt": "Evidence shows potential subgroup impact. Next step?",
+              "choices": [
+                {
+                  "label": "Activate human override and targeted review",
+                  "result": "excellent",
+                  "feedback": "Strong governance response: containment plus structured review."
+                },
+                {
+                  "label": "Proceed as normal and review next month",
+                  "result": "needs_improvement",
+                  "feedback": "Oversight delay conflicts with risk-based escalation expectations."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

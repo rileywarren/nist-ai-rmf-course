@@ -1,0 +1,76 @@
+{
+  "title": "Capstone: Build an AI Risk Management Plan",
+  "description": "Apply all four core functions of the AI RMF to a realistic AI system. You'll work through GOVERN, MAP, MEASURE, and MANAGE to produce a structured risk management plan.",
+  "systemOptions": [
+    {
+      "id": "healthcare",
+      "name": "MedAssist — AI Diagnostic Support System",
+      "description": "An AI system that analyzes medical images (X-rays, MRIs) to flag potential abnormalities for radiologist review. Used in hospitals and outpatient clinics. Trained on data from 15 academic medical centers.",
+      "riskLevel": "High",
+      "sector": "Healthcare"
+    },
+    {
+      "id": "hiring",
+      "name": "TalentMatch — AI Resume Screening System",
+      "description": "An AI system that screens job applications, ranks candidates, and recommends a shortlist for human recruiters. Used by a Fortune 500 company across all departments. Uses a third-party NLP model fine-tuned on historical hiring data.",
+      "riskLevel": "High",
+      "sector": "Human Resources"
+    },
+    {
+      "id": "delivery",
+      "name": "AutoDeliver — Autonomous Delivery Robot Fleet",
+      "description": "A fleet of sidewalk delivery robots that autonomously navigate urban environments to deliver packages. Uses computer vision, LIDAR, and path planning algorithms. Deployed in 3 pilot cities.",
+      "riskLevel": "High",
+      "sector": "Transportation / Logistics"
+    }
+  ],
+  "steps": [
+    {
+      "id": "govern",
+      "title": "Step 1: GOVERN — Establish Governance",
+      "description": "Define the governance structure and policies for your chosen AI system.",
+      "fields": [
+        {"id": "gov-policies", "label": "What organizational policies need to be in place? (GOVERN 1)", "type": "textarea", "hint": "Consider legal requirements, trustworthy AI integration, risk tolerance processes, and monitoring schedules."},
+        {"id": "gov-accountability", "label": "Who is responsible and accountable? Define roles. (GOVERN 2)", "type": "textarea", "hint": "Think about executive leadership, technical teams, compliance, and training needs."},
+        {"id": "gov-diversity", "label": "How will you ensure diverse perspectives? (GOVERN 3)", "type": "textarea", "hint": "Consider team composition, human-AI oversight policies, and inclusion of impacted communities."},
+        {"id": "gov-culture", "label": "How will you foster a risk-aware culture? (GOVERN 4)", "type": "textarea", "hint": "Think about safety-first mindset, documentation practices, incident sharing."},
+        {"id": "gov-engagement", "label": "Who are your key external stakeholders and how will you engage them? (GOVERN 5)", "type": "textarea", "hint": "Consider end users, impacted communities, regulators, advocacy groups."},
+        {"id": "gov-thirdparty", "label": "What third-party risks exist and how will you address them? (GOVERN 6)", "type": "textarea", "hint": "Consider third-party data, models, software, and IP risks."}
+      ]
+    },
+    {
+      "id": "map",
+      "title": "Step 2: MAP — Establish Context and Identify Risks",
+      "description": "Document the context, categorize the system, and characterize potential impacts.",
+      "fields": [
+        {"id": "map-context", "label": "Describe the intended purpose, users, and deployment context. (MAP 1)", "type": "textarea", "hint": "Include expected users, settings, legal considerations, and risk tolerance."},
+        {"id": "map-categorize", "label": "How would you categorize this AI system? (MAP 2)", "type": "textarea", "hint": "What type of model? What are its knowledge limits? How is output overseen?"},
+        {"id": "map-capabilities", "label": "What are the expected benefits and potential costs? (MAP 3)", "type": "textarea", "hint": "Consider both monetary and non-monetary costs, including from errors."},
+        {"id": "map-thirdparty", "label": "What third-party components are involved and what risks do they introduce? (MAP 4)", "type": "textarea", "hint": "Consider data sources, pre-trained models, cloud services, APIs."},
+        {"id": "map-impacts", "label": "Identify and characterize potential impacts. (MAP 5)", "type": "textarea", "hint": "Think about impacts to individuals, groups, communities, organizations, and ecosystems. Rate likelihood and magnitude."}
+      ]
+    },
+    {
+      "id": "measure",
+      "title": "Step 3: MEASURE — Define Metrics and Evaluation",
+      "description": "Select metrics, define TEVV processes, and plan risk tracking.",
+      "fields": [
+        {"id": "meas-metrics", "label": "What metrics will you use for each trustworthiness characteristic? (MEASURE 1)", "type": "textarea", "hint": "Consider validity, safety, security, transparency, explainability, privacy, and fairness metrics."},
+        {"id": "meas-testing", "label": "Describe your TEVV approach. (MEASURE 2)", "type": "textarea", "hint": "How will you test before deployment? What about ongoing monitoring? Who performs independent review?"},
+        {"id": "meas-tracking", "label": "How will you track risks over time? (MEASURE 3)", "type": "textarea", "hint": "Consider emergent risks, end user feedback mechanisms, and hard-to-measure risks."},
+        {"id": "meas-feedback", "label": "How will you assess whether your measurements are effective? (MEASURE 4)", "type": "textarea", "hint": "Consider domain expert consultation, deployment context validation, and documented improvements."}
+      ]
+    },
+    {
+      "id": "manage",
+      "title": "Step 4: MANAGE — Plan Risk Treatment",
+      "description": "Prioritize risks and develop response, monitoring, and communication plans.",
+      "fields": [
+        {"id": "mgmt-prioritize", "label": "Prioritize your top 5 risks and assign response strategies. (MANAGE 1)", "type": "textarea", "hint": "For each risk: mitigate, transfer, avoid, or accept. Document residual risks."},
+        {"id": "mgmt-maximize", "label": "How will you maximize benefits while minimizing negative impacts? (MANAGE 2)", "type": "textarea", "hint": "Consider non-AI alternatives, mechanisms to sustain value, procedures for unknown risks, and disengagement criteria."},
+        {"id": "mgmt-thirdparty", "label": "How will you manage third-party risks on an ongoing basis? (MANAGE 3)", "type": "textarea", "hint": "Regular monitoring, pre-trained model tracking, applying risk controls."},
+        {"id": "mgmt-monitor", "label": "Describe your post-deployment monitoring and incident response plan. (MANAGE 4)", "type": "textarea", "hint": "Include monitoring mechanisms, user feedback capture, incident communication, change management, and continual improvement."}
+      ]
+    }
+  ]
+}

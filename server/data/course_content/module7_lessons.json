@@ -1,0 +1,98 @@
+{
+  "lessons": [
+    {
+      "id": "m7-manage-overview",
+      "moduleId": "module-7",
+      "title": "MANAGE Overview",
+      "sections": [
+        {
+          "type": "text",
+          "content": "The MANAGE function converts assessed risk into action plans. It focuses on prioritization, treatment tracking, and response readiness."
+        },
+        {
+          "type": "callout",
+          "style": "warning",
+          "title": "Action bias",
+          "content": "Do not treat all risks equally. Prioritize by impact and controllability with explicit owners."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "core-functions",
+          "caption": "MANAGE executes treatment decisions informed by MAP and MEASURE evidence."
+        }
+      ]
+    },
+    {
+      "id": "m7-response-tree",
+      "moduleId": "module-7",
+      "title": "Response Decision Tree",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Practice selecting the strongest containment and communication response path."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "decisionTree",
+          "prompt": "A severe model failure impacts customers. Choose the best response sequence.",
+          "startNodeId": "m1",
+          "nodes": [
+            {
+              "id": "m1",
+              "prompt": "What is the first action?",
+              "choices": [
+                {
+                  "label": "Contain impact and activate incident protocol",
+                  "nextNodeId": "m2"
+                },
+                {
+                  "label": "Wait for weekly operations meeting",
+                  "result": "needs_improvement",
+                  "feedback": "Delayed containment increases risk and weakens trust."
+                }
+              ]
+            },
+            {
+              "id": "m2",
+              "prompt": "What follows containment?",
+              "choices": [
+                {
+                  "label": "Notify stakeholders and document corrective actions",
+                  "result": "excellent",
+                  "feedback": "This supports accountability, transparency, and structured recovery."
+                },
+                {
+                  "label": "Skip communications and silently patch",
+                  "result": "needs_improvement",
+                  "feedback": "Silent fixes undermine governance and downstream learning."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m7-mitigation-checklist",
+      "moduleId": "module-7",
+      "title": "Mitigation Checklist",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Track mitigation execution so unresolved risks do not linger."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "checklist",
+          "instruction": "Check each item once your response plan includes it.",
+          "items": [
+            { "id": "mgt1", "label": "Containment owner assigned" },
+            { "id": "mgt2", "label": "Customer and regulator communication plan drafted" },
+            { "id": "mgt3", "label": "Root cause analysis documented" },
+            { "id": "mgt4", "label": "Verification of fix scheduled" }
+          ]
+        }
+      ]
+    }
+  ]
+}

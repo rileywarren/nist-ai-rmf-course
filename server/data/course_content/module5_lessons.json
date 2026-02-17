@@ -1,0 +1,71 @@
+{
+  "lessons": [
+    {
+      "id": "m5-context-setup",
+      "moduleId": "module-5",
+      "title": "Context Setup and Scope",
+      "sections": [
+        {
+          "type": "text",
+          "content": "The MAP function starts by defining intended use, stakeholders, and impact boundaries. Strong context framing prevents downstream control gaps."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "harms-taxonomy",
+          "caption": "Use the harms taxonomy to evaluate people, organization, and ecosystem impacts."
+        },
+        {
+          "type": "callout",
+          "style": "tip",
+          "title": "Context first",
+          "content": "Do not finalize risk treatment until context assumptions and affected populations are explicit."
+        }
+      ]
+    },
+    {
+      "id": "m5-impact-checklist",
+      "moduleId": "module-5",
+      "title": "Impact Mapping Checklist",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Evaluate direct and indirect harms before release."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "checklist",
+          "instruction": "Mark each assessment step as complete for your current use case.",
+          "items": [
+            { "id": "i1", "label": "Defined intended users and affected non-users" },
+            { "id": "i2", "label": "Mapped legal and policy constraints" },
+            { "id": "i3", "label": "Documented fairness and safety hypotheses" },
+            { "id": "i4", "label": "Identified high-severity failure modes" },
+            { "id": "i5", "label": "Assigned owners for unresolved risks" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m5-risk-rank",
+      "moduleId": "module-5",
+      "title": "Risk Prioritization Ranking",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Prioritize risks by severity, likelihood, and controllability."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "ranking",
+          "instruction": "Rank the risks from highest to lowest priority for immediate action.",
+          "items": [
+            { "id": "r1", "label": "Unclear escalation path for harmful outputs" },
+            { "id": "r2", "label": "Sparse monitoring metrics in production" },
+            { "id": "r3", "label": "Third-party model update without review" },
+            { "id": "r4", "label": "High-impact decision with weak appeal process" }
+          ]
+        }
+      ]
+    }
+  ]
+}

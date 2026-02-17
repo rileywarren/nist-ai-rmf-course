@@ -1,0 +1,247 @@
+{
+  "modules": [
+    {
+      "id": "module-1",
+      "number": 1,
+      "moduleNumber": 1,
+      "title": "Introduction and Framing Risk",
+      "description": "Understand AI risk foundations, harm taxonomy, and common governance challenges.",
+      "quizId": "quiz-module-1",
+      "scenarioId": "scenario-incident-response",
+      "hasQuiz": true,
+      "hasScenario": true,
+      "badge": {
+        "id": "risk-framer",
+        "name": "Risk Framer",
+        "emoji": "⚖️"
+      },
+      "lessons": [
+        {
+          "id": "m1-welcome",
+          "title": "Welcome & Course Overview"
+        },
+        {
+          "id": "m1-risk-impacts-harms",
+          "title": "Understanding Risk, Impacts, and Harms"
+        },
+        {
+          "id": "m1-challenges",
+          "title": "Challenges for AI Risk Management"
+        }
+      ]
+    },
+    {
+      "id": "module-2",
+      "number": 2,
+      "moduleNumber": 2,
+      "title": "Audience and AI Lifecycle",
+      "description": "Learn AI actors, lifecycle stages, and TEVV integration across deployment.",
+      "quizId": "quiz-module-2",
+      "hasQuiz": true,
+      "hasScenario": false,
+      "badge": {
+        "id": "lifecycle-navigator",
+        "name": "Lifecycle Navigator",
+        "emoji": "🚀"
+      },
+      "lessons": [
+        {
+          "id": "m2-actors",
+          "title": "AI Actors and Roles"
+        },
+        {
+          "id": "m2-lifecycle",
+          "title": "The AI System Lifecycle"
+        },
+        {
+          "id": "m2-tevv",
+          "title": "TEVV Throughout the Lifecycle"
+        }
+      ]
+    },
+    {
+      "id": "module-3",
+      "number": 3,
+      "moduleNumber": 3,
+      "title": "Trustworthy AI Characteristics",
+      "description": "Explore trustworthiness dimensions and practical tradeoff handling.",
+      "quizId": "quiz-module-3",
+      "hasQuiz": true,
+      "hasScenario": false,
+      "badge": {
+        "id": "trustworthiness-expert",
+        "name": "Trustworthiness Expert",
+        "emoji": "🧠"
+      },
+      "lessons": [
+        {
+          "id": "m3-overview",
+          "title": "Overview of Trustworthy AI"
+        },
+        {
+          "id": "m3-valid-safe",
+          "title": "Valid & Reliable + Safe"
+        },
+        {
+          "id": "m3-secure-accountable",
+          "title": "Secure & Resilient + Accountable & Transparent"
+        },
+        {
+          "id": "m3-explain-privacy",
+          "title": "Explainable & Interpretable + Privacy-Enhanced"
+        },
+        {
+          "id": "m3-fair-bias",
+          "title": "Fair - with Harmful Bias Managed"
+        }
+      ]
+    },
+    {
+      "id": "module-4",
+      "number": 4,
+      "moduleNumber": 4,
+      "title": "The GOVERN Function",
+      "description": "Build governance, accountability, and oversight structures.",
+      "quizId": "quiz-module-4",
+      "hasQuiz": true,
+      "hasScenario": false,
+      "badge": {
+        "id": "governance-architect",
+        "name": "Governance Architect",
+        "emoji": "🏛️"
+      },
+      "lessons": [
+        {
+          "id": "m4-govern-overview",
+          "title": "GOVERN Overview"
+        },
+        {
+          "id": "m4-policy-worksheet",
+          "title": "Policy and Accountability Worksheet"
+        },
+        {
+          "id": "m4-escalation-decision",
+          "title": "Escalation Decision Tree"
+        }
+      ]
+    },
+    {
+      "id": "module-5",
+      "number": 5,
+      "moduleNumber": 5,
+      "title": "The MAP Function",
+      "description": "Establish context and characterize risk impacts before deployment.",
+      "quizId": "quiz-module-5",
+      "scenarioId": "scenario-go-no-go",
+      "hasQuiz": true,
+      "hasScenario": true,
+      "badge": {
+        "id": "context-cartographer",
+        "name": "Context Cartographer",
+        "emoji": "🗺️"
+      },
+      "lessons": [
+        {
+          "id": "m5-context-setup",
+          "title": "Context Setup and Scope"
+        },
+        {
+          "id": "m5-impact-checklist",
+          "title": "Impact Mapping Checklist"
+        },
+        {
+          "id": "m5-risk-rank",
+          "title": "Risk Prioritization Ranking"
+        }
+      ]
+    },
+    {
+      "id": "module-6",
+      "number": 6,
+      "moduleNumber": 6,
+      "title": "The MEASURE Function",
+      "description": "Define evidence quality, metrics, and TEVV checkpoints.",
+      "quizId": "quiz-module-6",
+      "hasQuiz": true,
+      "hasScenario": false,
+      "badge": {
+        "id": "measurement-master",
+        "name": "Measurement Master",
+        "emoji": "📏"
+      },
+      "lessons": [
+        {
+          "id": "m6-measure-basics",
+          "title": "MEASURE Basics"
+        },
+        {
+          "id": "m6-metrics-worksheet",
+          "title": "Metrics Worksheet"
+        },
+        {
+          "id": "m6-tevv-flashcards",
+          "title": "TEVV Flashcards"
+        }
+      ]
+    },
+    {
+      "id": "module-7",
+      "number": 7,
+      "moduleNumber": 7,
+      "title": "The MANAGE Function",
+      "description": "Prioritize treatment actions, escalation, and ongoing risk response.",
+      "quizId": "quiz-module-7",
+      "scenarioId": "scenario-governance",
+      "hasQuiz": true,
+      "hasScenario": true,
+      "badge": {
+        "id": "risk-commander",
+        "name": "Risk Commander",
+        "emoji": "🧭"
+      },
+      "lessons": [
+        {
+          "id": "m7-manage-overview",
+          "title": "MANAGE Overview"
+        },
+        {
+          "id": "m7-response-tree",
+          "title": "Response Decision Tree"
+        },
+        {
+          "id": "m7-mitigation-checklist",
+          "title": "Mitigation Checklist"
+        }
+      ]
+    },
+    {
+      "id": "module-8",
+      "number": 8,
+      "moduleNumber": 8,
+      "title": "Profiles, Integration, and Capstone",
+      "description": "Apply profiles and integrate AI RMF practices across operations.",
+      "quizId": "quiz-module-8",
+      "hasQuiz": true,
+      "hasScenario": false,
+      "badge": {
+        "id": "ai-rmf-master",
+        "name": "AI RMF Master",
+        "emoji": "🏅"
+      },
+      "lessons": [
+        {
+          "id": "m8-profiles-overview",
+          "title": "Profiles Overview"
+        },
+        {
+          "id": "m8-integration-worksheet",
+          "title": "Integration Worksheet"
+        },
+        {
+          "id": "m8-capstone-readiness",
+          "title": "Capstone Readiness"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "lessons": [
+    {
+      "id": "m6-measure-basics",
+      "moduleId": "module-6",
+      "title": "MEASURE Basics",
+      "sections": [
+        {
+          "type": "text",
+          "content": "MEASURE provides evidence quality for risk decisions. It links metrics, testing, and monitoring so decisions are defensible."
+        },
+        {
+          "type": "callout",
+          "style": "info",
+          "title": "Evidence discipline",
+          "content": "Capture both expected and observed behavior. Strong evidence includes assumptions, limits, and confidence level."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "poll",
+          "question": "Which measurement gap is most urgent in your environment?",
+          "options": [
+            { "label": "Limited fairness metrics", "value": "fairness" },
+            { "label": "Weak incident telemetry", "value": "telemetry" },
+            { "label": "No reproducible validation", "value": "validation" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m6-metrics-worksheet",
+      "moduleId": "module-6",
+      "title": "Metrics Worksheet",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Define measurable checks for trustworthiness goals and operational thresholds."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "worksheet",
+          "prompt": "Draft three measurable indicators for one AI system.",
+          "fields": [
+            {
+              "id": "metric1",
+              "label": "Metric 1",
+              "placeholder": "Name and threshold"
+            },
+            {
+              "id": "metric2",
+              "label": "Metric 2",
+              "placeholder": "Name and threshold"
+            },
+            {
+              "id": "metric3",
+              "label": "Metric 3",
+              "placeholder": "Name and threshold"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m6-tevv-flashcards",
+      "moduleId": "module-6",
+      "title": "TEVV Flashcards",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Review key testing terms that support repeatable risk evaluations."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "flashcards",
+          "cards": [
+            {
+              "front": "Verification",
+              "back": "Checks the system was built according to design requirements and specifications."
+            },
+            {
+              "front": "Validation",
+              "back": "Checks the system is appropriate for intended use and context."
+            },
+            {
+              "front": "Monitoring",
+              "back": "Continuous observation in operation to detect drift, incidents, and degradation."
+            },
+            {
+              "front": "Residual Risk",
+              "back": "Remaining risk after controls are applied and accepted by accountable owners."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

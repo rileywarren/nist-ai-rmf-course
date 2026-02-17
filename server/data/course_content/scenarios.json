@@ -1,0 +1,734 @@
+{
+  "scenarios": {
+    "scenario-incident-response": {
+      "id": "scenario-incident-response",
+      "title": "Fairness Incident in Production",
+      "moduleId": "module-7",
+      "context": "You are the AI Risk Manager at MedScreen Inc. A hospital partner reports that your AI diagnostic screening tool has significantly different false-negative rates across demographic groups. The issue was not detected during pre-deployment testing.",
+      "steps": [
+        {
+          "id": "step-1",
+          "narrative": "A serious fairness signal has arrived after rollout. What is your immediate response?",
+          "choices": [
+            {
+              "text": "Declare an incident, suspend affected recommendations, and activate governance, clinical risk, and legal response channels.",
+              "nextStep": "step-2a",
+              "feedback": "This aligns with MANAGE 1.1 and MANAGE 4.1 by moving to controlled operation and immediate monitoring. Starting with response and traceability is the strongest first move when patient risk is possible.",
+              "points": 10
+            },
+            {
+              "text": "Ask the hospital to manually reroute cases while collecting more data before any operational action.",
+              "nextStep": "step-2b",
+              "feedback": "Asking for support is useful, but delaying mitigation risks repeat misses. MANAGE 1.1 still recommends immediate containment actions first, then coordinated manual handling.",
+              "points": 7
+            },
+            {
+              "text": "Notify model engineering and wait for their full root-cause report before informing stakeholders.",
+              "nextStep": "step-2c",
+              "feedback": "This is incomplete because MANAGE 4.3 expects timely communication. Investigate and inform first, then communicate with context-aware updates.",
+              "points": 4
+            },
+            {
+              "text": "Publish a brief statement blaming data drift in one hospital site and continue monitoring silently.",
+              "nextStep": "step-2c",
+              "feedback": "This is weak. MANAGE 1.3 requires documenting residual and known risks, and MANAGE 4.3 requires clear incident communication, not blame-only messaging.",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "id": "step-2a",
+          "narrative": "The incident is contained. How do you investigate the disparity?",
+          "choices": [
+            {
+              "text": "Run subgroup-level validity/reliability checks, review thresholds, and compare input distributions across facilities before changing model settings.",
+              "nextStep": "step-3a",
+              "feedback": "Strong. This combines MEASURE-informed diagnostics with MANAGE 4.1 by preserving evidence quality and reducing ad-hoc changes.",
+              "points": 10
+            },
+            {
+              "text": "Only re-run aggregate accuracy and recall on the full population.",
+              "nextStep": "step-3b",
+              "feedback": "This misses subgroup effects. MANAGE 2 requires treatment planning on mapped risk patterns, and MEASURE 2 emphasizes disaggregated evidence.",
+              "points": 5
+            },
+            {
+              "text": "Only interview model developers and accept their assurance.",
+              "nextStep": "step-3c",
+              "feedback": "Too narrow. MANAGE 1.2 and MEASURE 2.2 expect broader validation, including independent evidence and affected-party feedback where possible.",
+              "points": 4
+            },
+            {
+              "text": "Patch the threshold immediately with no root cause documentation.",
+              "nextStep": "step-3b",
+              "feedback": "Rapid action can be useful, but without MEASURE evidence and MANAGE 1.4 documentation, this could create hidden residual risk and make future review harder.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-2b",
+          "narrative": "Manual triage is in place. What should the communication plan include now?",
+          "choices": [
+            {
+              "text": "Send a joint clinical and partner update with impact explanation, interim controls, and scheduled follow-up review.",
+              "nextStep": "step-3a",
+              "feedback": "Good. MANAGE 4.3 and GOVERN 5.1 emphasize timely, transparent communication with affected stakeholders and partners.",
+              "points": 8
+            },
+            {
+              "text": "Only inform the hospital operations lead and keep leadership unaware until corrected.",
+              "nextStep": "step-3b",
+              "feedback": "Incomplete. Governance expects leadership and affected parties to receive coordinated updates to avoid inconsistent actions and reputational harm.",
+              "points": 4
+            },
+            {
+              "text": "Issue a short status memo and no numeric context to avoid legal exposure.",
+              "nextStep": "step-3c",
+              "feedback": "Insufficient. MANAGE 4.3 requires substantive communication of likely impact and remediation progress to maintain trust.",
+              "points": 3
+            },
+            {
+              "text": "Postpone all communication until final root cause is settled to avoid confusion.",
+              "nextStep": "step-3c",
+              "feedback": "Deferring communication reduces trust and can compound risk in healthcare workflows. Incident responsiveness is a cross-cutting MANAGE requirement.",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "id": "step-3a",
+          "narrative": "You have evidence and stakeholder visibility. What remediation path do you choose next?",
+          "choices": [
+            {
+              "text": "Apply targeted mitigation: tighten subgroup-specific decision boundaries, add human oversight, and run a bias-focused MEASURE cycle before scaling.",
+              "nextStep": "step-4a",
+              "feedback": "This is aligned with MANAGE 2 (risk treatment options), MANAGE 4.1 monitoring, and MANAGE 2.1 non-AI alternatives where needed for safety margins.",
+              "points": 10
+            },
+            {
+              "text": "Transfer responsibility to the hospital partner and suspend internal accountability.",
+              "nextStep": "step-4b",
+              "feedback": "Transfer in MANAGE must still keep internal accountability records. This choice under-specifies internal ownership and residual risk documentation.",
+              "points": 5
+            },
+            {
+              "text": "Avoid deployment only in the affected units and continue with current workflow elsewhere.",
+              "nextStep": "step-4c",
+              "feedback": "Partial avoid can be valid, but without documented reason and alternative controls this is only a partial treatment and should include explicit go-forward criteria.",
+              "points": 6
+            },
+            {
+              "text": "Accept residual disparity and continue without controls to avoid delays.",
+              "nextStep": "step-4c",
+              "feedback": "Acceptance may be possible only with explicit residual risk decision and board-level approval; this is usually not defensible in this clinical context.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-4a",
+          "narrative": "How should you close the incident response?",
+          "choices": [
+            {
+              "text": "Document root cause, residual risk, and policy changes; schedule quarterly audits and update MLOps playbooks including fairness checkpoints.",
+              "nextStep": "step-5a",
+              "feedback": "This closes the loop with MANAGE 1.4 documentation and MANAGE 4.2 process-based recovery, while strengthening future MEASURE and governance.",
+              "points": 10
+            },
+            {
+              "text": "Document only the immediate fix and remove old evidence to reduce effort.",
+              "nextStep": "step-5a",
+              "feedback": "Weak. MANAGE 4.4 style recovery planning needs auditable records for sustained learning. Removing evidence weakens future defense and auditability.",
+              "points": 4
+            },
+            {
+              "text": "Rely on vendor patch notes and no internal process update.",
+              "nextStep": "step-5a",
+              "feedback": "This treats governance as external dependency only. MANAGE 3 and MANAGE 4 require internal process capture and recurring review ownership.",
+              "points": 5
+            },
+            {
+              "text": "Declare closure once the false-negative spread is improved for one week.",
+              "nextStep": "step-5a",
+              "feedback": "Short-term stabilization is not enough. Documentation and process improvement must be durable and reviewed over time per MANAGE and GOVERN expectations.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-4b",
+          "narrative": "How do you finalize this path?",
+          "choices": [
+            {
+              "text": "Clarify accountable owners again, then document transfer plus internal monitoring obligations and external communication.",
+              "nextStep": "step-5a",
+              "feedback": "Improves ownership visibility, matching MANAGE 1.3 and MANAGE 4.3. Stronger than the initial transfer-only approach.",
+              "points": 7
+            },
+            {
+              "text": "Let the partner handle the rest and keep governance notes internal.",
+              "nextStep": "step-5a",
+              "feedback": "This still leaves residual risk undocumented for your organization and weakens accountability.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-4c",
+          "narrative": "How do you stabilize this branch to avoid future recurrence?",
+          "choices": [
+            {
+              "text": "Create a controlled rollout plan with MANAGE-defined acceptance thresholds and periodic fairness re-testing before re-activation.",
+              "nextStep": "step-5a",
+              "feedback": "Good recovery approach. This uses MANAGE 1.2 prioritization and MEASURE-informed release control before full re-enable.",
+              "points": 7
+            },
+            {
+              "text": "Keep the current partial suspension and stop public reporting to reduce pressure.",
+              "nextStep": "step-5a",
+              "feedback": "This does not fully meet MANAGE 4.3 communication requirements and does not improve evidence-based improvement.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-3b",
+          "narrative": "An alternate investigation path is delayed. What should you do now?",
+          "choices": [
+            {
+              "text": "Reopen investigation with disaggregated testing and independent reviewer pairing before any final closure decision.",
+              "nextStep": "step-3a",
+              "feedback": "That corrects the evidence gap and aligns with MANAGE 1.2 and MEASURE 2 best practices.",
+              "points": 6
+            },
+            {
+              "text": "Proceed to rollout suspension only and skip deeper analysis to avoid delays.",
+              "nextStep": "step-4a",
+              "feedback": "Containment is useful, but without stronger analysis you may not satisfy MANAGE 1.4 residual documentation requirements.",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "id": "step-3c",
+          "narrative": "Communication and investigation are lagging. What is the minimum viable next move?",
+          "choices": [
+            {
+              "text": "Issue a transparent status update and convene a joint remediation board with clinical lead, risk, and model team.",
+              "nextStep": "step-3a",
+              "feedback": "This strengthens MANAGE 4.3 communication and restores process control across functions.",
+              "points": 5
+            },
+            {
+              "text": "Postpone all updates but keep internal logs for later audit.",
+              "nextStep": "step-3b",
+              "feedback": "Still weak: transparency timing is part of incident readiness and trust management in MANAGE 4.3.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-5a",
+          "narrative": "Final step: choose your closing action and improvement plan.",
+          "choices": [
+            {
+              "text": "Finalize incident report with owners, timelines, residual risk statements, and preventive controls in quarterly governance reviews.",
+              "nextStep": null,
+              "feedback": "Excellent: you completed containment, treatment planning, residual risk documentation, and process improvement aligned with MANAGE 1–4.",
+              "points": 10
+            },
+            {
+              "text": "Close with technical fix notes only and defer policy updates to next quarter.",
+              "nextStep": null,
+              "feedback": "Reasonable short-term reporting, but gap in governance maturity. MANAGE 1.4 and GOVERN expectations require broader closure documentation.",
+              "points": 5
+            },
+            {
+              "text": "Reopen only if another complaint arrives and otherwise archive evidence.",
+              "nextStep": null,
+              "feedback": "This creates silent recurrence risk and weakens your MANAGE feedback loop and debrief culture.",
+              "points": 3
+            }
+          ]
+        }
+      ],
+      "maxPoints": 50,
+      "grading": {
+        "excellent": {
+          "min": 40,
+          "message": "Excellent incident management. You contained the issue quickly, investigated rigorously, communicated clearly, and improved your operating process."
+        },
+        "good": {
+          "min": 25,
+          "message": "Good response with partial execution of MANAGE and GOVERN practices. Improve one or two missing residual-risk documentation steps."
+        },
+        "needsWork": {
+          "min": 0,
+          "message": "Needs improvement. Revisit containment, evidence-first investigation, and transparent closure with residual-risk documentation."
+        }
+      }
+    },
+    "scenario-go-no-go": {
+      "id": "scenario-go-no-go",
+      "title": "Go/No-Go Deployment Decision",
+      "moduleId": "module-5",
+      "context": "You lead the AI governance team at a financial services company. Your team has developed an AI-powered loan approval recommendation system. You need to decide whether it is ready for deployment.",
+      "steps": [
+        {
+          "id": "step-1",
+          "narrative": "Your first task is context establishment. What do you do?",
+          "choices": [
+            {
+              "text": "Document intended use, borrower and branch users, legal constraints, and expected social/economic harm paths before any deployment date decision.",
+              "nextStep": "step-2a",
+              "feedback": "Strong MAP start. This is MAP 1.1 and MAP 1.4 context work that prevents narrow technical decisions.",
+              "points": 10
+            },
+            {
+              "text": "Prioritize model AUC and launch next quarter to meet business targets.",
+              "nextStep": "step-2b",
+              "feedback": "This is a premature path. MAP requires context clarity before deployment readiness.",
+              "points": 4
+            },
+            {
+              "text": "Ask legal and risk teams for comments after deployment architecture is finalized.",
+              "nextStep": "step-2c",
+              "feedback": "Late integration limits correction options. MAP is meant to inform those architecture choices early.",
+              "points": 6
+            },
+            {
+              "text": "Run one small pilot and assume context can be updated later if needed.",
+              "nextStep": "step-2a",
+              "feedback": "A pilot can be useful, but only after clear context boundaries and escalation conditions are defined.",
+              "points": 7
+            }
+          ]
+        },
+        {
+          "id": "step-2a",
+          "narrative": "MAP and bias review results are now available. False-negative rates for protected groups are within limits in the prelaunch benchmark, but subgroup robustness is uncertain.",
+          "choices": [
+            {
+              "text": "Require additional subgroup validation, data representativeness checks, and calibration review before go/no-go.",
+              "nextStep": "step-3a",
+              "feedback": "Good. MEASURE-backed questions still unresolved should block final deployment until MAP 5 impact risk is clear.",
+              "points": 10
+            },
+            {
+              "text": "Accept current evidence as sufficient because aggregate fairness metrics pass.",
+              "nextStep": "step-3c",
+              "feedback": "This misses MAP and fairness depth expected in lending contexts where subgroup harms can be subtle but material.",
+              "points": 4
+            },
+            {
+              "text": "Request manual overrides only and proceed.",
+              "nextStep": "step-3b",
+              "feedback": "Manual overrides help but do not substitute for stronger MAP and bias evidence.",
+              "points": 6
+            },
+            {
+              "text": "Delay and ask marketing to continue with alternative channels.",
+              "nextStep": "step-3a",
+              "feedback": "Conservative, but you still need a documented basis for risk closure; extra analysis is the strongest action.",
+              "points": 7
+            }
+          ]
+        },
+        {
+          "id": "step-2b",
+          "narrative": "The model engineering team wants to proceed quickly. How should you involve stakeholders before finalization?",
+          "choices": [
+            {
+              "text": "Convene governance, compliance, underwriting, and frontline operations to agree on decision thresholds and human appeal channels.",
+              "nextStep": "step-3a",
+              "feedback": "Excellent: this enforces MAP 3 and stakeholder alignment before MAP 5 outcome claims are accepted.",
+              "points": 9
+            },
+            {
+              "text": "Notify product alone and let them manage stakeholder comms.",
+              "nextStep": "step-2a",
+              "feedback": "This narrows perspective and weakens risk governance in a high-impact use case.",
+              "points": 4
+            },
+            {
+              "text": "Only include executive leadership and legal teams.",
+              "nextStep": "step-3b",
+              "feedback": "Leadership and legal are important, but operations and affected function teams remain essential for realistic risk mapping.",
+              "points": 6
+            }
+          ]
+        },
+        {
+          "id": "step-2c",
+          "narrative": "Legal review notes uncertain explainability requirements for adverse credit actions. What next?",
+          "choices": [
+            {
+              "text": "Pause final decision and revise MEASURE plan to include explainability and adverse action rationale testing.",
+              "nextStep": "step-3a",
+              "feedback": "Strong: legal requirements become MAP 1 constraints and MEASURE 2.9/2.10 evidence triggers.",
+              "points": 10
+            },
+            {
+              "text": "Proceed with deployment and handle explainability if complaints rise.",
+              "nextStep": "step-3c",
+              "feedback": "This is a reverse order approach and weak for credit outcomes. Better to close legal-context gaps first.",
+              "points": 3
+            },
+            {
+              "text": "Drop explainability entirely and rely on appeal-only review.",
+              "nextStep": "step-3c",
+              "feedback": "Appeal processes need explanation quality and evidence; this approach undercuts auditable fairness and accountability.",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "id": "step-3a",
+          "narrative": "You are ready for final risk tolerance alignment and go/no-go recommendation. Which statement is best?",
+          "choices": [
+            {
+              "text": "Defer launch until subgroup risk, residual risk criteria, and human oversight workflows are documented and approved.",
+              "nextStep": "step-4a",
+              "feedback": "This is aligned with MAP 1.5 and MAP 5 plus MANAGE 1.1 go/no-go discipline.",
+              "points": 10
+            },
+            {
+              "text": "Approve launch with a voluntary post-launch monitoring covenant only.",
+              "nextStep": "step-4b",
+              "feedback": "Monitoring alone is insufficient when MAP evidence still leaves uncertainty in subgroup impact and tolerance alignment.",
+              "points": 5
+            },
+            {
+              "text": "Launch with a sunset review in 90 days and no interim escalation route.",
+              "nextStep": "step-4b",
+              "feedback": "Timeline-only controls are weak in regulated lending and may expose the firm to unfairness and compliance risk.",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "id": "step-3b",
+          "narrative": "The system is close to decision. What do you ask underwriting and sales leaders?",
+          "choices": [
+            {
+              "text": "Request formal acceptance of residual risks and required escalation thresholds before approval.",
+              "nextStep": "step-3a",
+              "feedback": "Good governance behavior. Explicitly ties operational owners to residual risk and go/no-go discipline.",
+              "points": 8
+            },
+            {
+              "text": "Ask only for qualitative comfort and proceed to launch.",
+              "nextStep": "step-4b",
+              "feedback": "Comfort statements without criteria do not satisfy MAP 1.5 or MANAGE 1.4 expectations.",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "id": "step-3c",
+          "narrative": "What risk tolerance statement should guide your final recommendation?",
+          "choices": [
+            {
+              "text": "Define tolerable residual risk, explicit rejection/appeal rights, and conditions for automatic pause or rollback.",
+              "nextStep": "step-4a",
+              "feedback": "This is an excellent MAP 1.5 and MANAGE response that protects customers and governance credibility.",
+              "points": 9
+            },
+            {
+              "text": "Rely on branch-level discretion while keeping central thresholds informal.",
+              "nextStep": "step-4b",
+              "feedback": "Informal thresholds are difficult to defend in regulated lending contexts and weaken MAP 5 alignment.",
+              "points": 5
+            },
+            {
+              "text": "Only include broad statements like ‘monitor monthly.’",
+              "nextStep": "step-4b",
+              "feedback": "That is insufficient specificity for fairness-sensitive AI and legal review.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-4a",
+          "narrative": "Final decision and response path. Which is the strongest recommendation?",
+          "choices": [
+            {
+              "text": "No-go for now; extend the pilot with controlled bias testing and stakeholder sign-off before any broader deployment.",
+              "nextStep": null,
+              "feedback": "Excellent MAP/MANAGE alignment. Better to delay deployment until evidence and tolerance gates are defensible.",
+              "points": 10
+            },
+            {
+              "text": "Go-live with narrow controls and a conditional launch memo to executives only.",
+              "nextStep": null,
+              "feedback": "This is a moderate path but still leaves uneven evidence and unclear communication channels.",
+              "points": 6
+            },
+            {
+              "text": "Abandon project and sunset team work.",
+              "nextStep": null,
+              "feedback": "This closes opportunity too early. A structured no-go-to-mitigate plan is more aligned with MANAGE 2 and MAP maturity goals.",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "id": "step-4b",
+          "narrative": "You selected a weaker path. What should be corrected before execution?",
+          "choices": [
+            {
+              "text": "Pause launch and complete MAP/MEASURE evidence plus stakeholder alignment, then re-assess with documented criteria.",
+              "nextStep": null,
+              "feedback": "Good recovery action. Brings your process back to MAP 1–5 and MANAGE 1.1 discipline.",
+              "points": 7
+            },
+            {
+              "text": "Proceed under legal review with limited controls and limited reporting.",
+              "nextStep": null,
+              "feedback": "This still risks noncompliance and unresolved fairness concerns. Insufficient for lending context.",
+              "points": 3
+            }
+          ]
+        }
+      ],
+      "maxPoints": 50,
+      "grading": {
+        "excellent": {
+          "min": 40,
+          "message": "Excellent. You preserved MAP-first discipline and built a defensible go/no-go recommendation with clear risk tolerance and control criteria."
+        },
+        "good": {
+          "min": 25,
+          "message": "Good framework use. Improve one layer: either stronger stakeholder-signed criteria or deeper subgroup validation before the final call."
+        },
+        "needsWork": {
+          "min": 0,
+          "message": "Needs improvement. Rework the path so context, bias evidence, and explicit no-go/conditions come before deployment approval."
+        }
+      }
+    },
+    "scenario-governance": {
+      "id": "scenario-governance",
+      "title": "Building Governance from Scratch",
+      "moduleId": "module-4",
+      "context": "You've been hired as the first AI Ethics Officer at a fast-growing startup that has 5 AI products in production but no formal AI governance. The CEO wants you to build a governance program.",
+      "steps": [
+        {
+          "id": "step-1",
+          "narrative": "You need a first 90-day governance plan. What should be your priority?",
+          "choices": [
+            {
+              "text": "Build a cross-functional governance charter with legal/regulatory mapping, risk appetite, and monitoring cadence.",
+              "nextStep": "step-2a",
+              "feedback": "Best start. This sets GOVERN 1 with clear guardrails before expanding teams and tooling.",
+              "points": 10
+            },
+            {
+              "text": "Issue a short memo about ethics values and call it done.",
+              "nextStep": "step-2b",
+              "feedback": "Values statements help, but without implementation detail they do not satisfy GOVERN 1 and GOVERN 2 requirements.",
+              "points": 3
+            },
+            {
+              "text": "Recruit one engineer and ask them to draft policy while continuing shipments.",
+              "nextStep": "step-2c",
+              "feedback": "This under-resources governance. GOVERN 2 requires documented accountability and training, not one-person drafting.",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "id": "step-2a",
+          "narrative": "Which team composition best supports GOVERN 3 and risk-aware operations?",
+          "choices": [
+            {
+              "text": "Diverse core team including engineering, risk, legal, product, frontline operators, and an external/community liaison.",
+              "nextStep": "step-3a",
+              "feedback": "Strong. Diversity and perspective diversity directly supports GOVERN 3.1 and People & Planet-informed decision quality.",
+              "points": 10
+            },
+            {
+              "text": "All technical staff only, since they handle all implementation issues.",
+              "nextStep": "step-3b",
+              "feedback": "Missing nontechnical and external perspectives weakens DEI and impact identification in high-risk settings.",
+              "points": 4
+            },
+            {
+              "text": "Only executive leadership and external PR.",
+              "nextStep": "step-3c",
+              "feedback": "Governance requires operating ownership, not just leadership signaling.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-2b",
+          "narrative": "Your startup asks for a quicker lightweight rollout. Which governance artifact is most essential first?",
+          "choices": [
+            {
+              "text": "Inventory of active AI systems, owners, and known risks.",
+              "nextStep": "step-3a",
+              "feedback": "Excellent pragmatic start. Without inventory and owners, GOVERN 1.6 and MANAGE readouts are impossible.",
+              "points": 7
+            },
+            {
+              "text": "A new AI ethics webpage and no controls behind the scenes.",
+              "nextStep": "step-2c",
+              "feedback": "Public language without operational artifacts will not support real decisions in audits or incidents.",
+              "points": 3
+            },
+            {
+              "text": "Vendor policy summaries only.",
+              "nextStep": "step-2c",
+              "feedback": "Third-party policy summaries help but are incomplete without internal accountability and roles.",
+              "points": 2
+            }
+          ]
+        },
+        {
+          "id": "step-2c",
+          "narrative": "Stakeholder engagement strategy is not yet defined. What is the right next move?",
+          "choices": [
+            {
+              "text": "Map internal and external stakeholders, define communication cadence, and establish an escalation path for concerns.",
+              "nextStep": "step-3a",
+              "feedback": "Aligned with GOVERN 5.1–5.3. This builds trust and speeds issue surfacing.",
+              "points": 8
+            },
+            {
+              "text": "Only engage customers when negative outcomes appear.",
+              "nextStep": "step-3c",
+              "feedback": "Reactive engagement misses prevention opportunities and People & Planet early signals.",
+              "points": 4
+            },
+            {
+              "text": "Wait until external regulators ask for details.",
+              "nextStep": "step-3c",
+              "feedback": "This is too late and increases governance and compliance risk."
+              ,
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-3a",
+          "narrative": "The policy and engagement foundations are drafted. Which final policy line closes remaining gaps?",
+          "choices": [
+            {
+              "text": "Define third-party controls: procurement clauses, provenance checks, update monitoring, and review obligations before each major model change.",
+              "nextStep": "step-4a",
+              "feedback": "This closes GOVERN 6 while linking to operational monitoring and MANAGE responsibilities.",
+              "points": 10
+            },
+            {
+              "text": "Keep third-party governance high level and review only in annual contracts.",
+              "nextStep": "step-4b",
+              "feedback": "Insufficient for AI lifecycle risk because model and data dependencies can change between annual cycles.",
+              "points": 5
+            },
+            {
+              "text": "Require only legal team sign-off on vendor use.",
+              "nextStep": "step-4b",
+              "feedback": "Legal review is necessary but not enough to capture continuous dependency risk.",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "id": "step-3b",
+          "narrative": "Your organization wants a faster plan. What remains most critical before launch?",
+          "choices": [
+            {
+              "text": "Define role ownership and training expectations for AI risk management immediately, even in a phased form.",
+              "nextStep": "step-3a",
+              "feedback": "Strong and practical. GOVERN 2 cannot be deferred and builds immediate execution discipline.",
+              "points": 7
+            },
+            {
+              "text": "Postpone ownership and training until the first major incident.",
+              "nextStep": "step-4b",
+              "feedback": "This invites inconsistent decisions and delayed detection of risk exposure.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-4a",
+          "narrative": "Choose the final 90-day governance rollout format for your CEO review.",
+          "choices": [
+            {
+              "text": "Publish a living governance charter with accountable owners, risk tolerance process, stakeholder engagement calendar, and third-party oversight controls.",
+              "nextStep": null,
+              "feedback": "Excellent. This is a real GOVERN 1–6 implementation scaffold and supports cross-functional execution.",
+              "points": 10
+            },
+            {
+              "text": "Create a static annual policy and wait for annual review.",
+              "nextStep": null,
+              "feedback": "This is too slow and weak for existing production systems. Governing must be active and updateable.",
+              "points": 5
+            },
+            {
+              "text": "Focus first on legal compliance only and delay operational integration.",
+              "nextStep": null,
+              "feedback": "Legal compliance is part of governance, but this misses culture, ownership, and operational feedback loops.",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "step-3c",
+          "narrative": "If stakeholder engagement remains inconsistent, what is the best correction?",
+          "choices": [
+            {
+              "text": "Add a formal engagement protocol with representative user and impacted community input in governance loops.",
+              "nextStep": "step-4a",
+              "feedback": "Good correction. This strengthens GOVERN 5 and People & Planet orientation across products.",
+              "points": 6
+            },
+            {
+              "text": "Continue with internal reviews and send only summary reports.",
+              "nextStep": "step-4b",
+              "feedback": "This leaves external signals unintegrated, risking late discovery of real-world harms.",
+              "points": 4
+            }
+          ]
+        },
+        {
+          "id": "step-4b",
+          "narrative": "Weak governance path chosen. What is the minimum acceptable end state before next phase?",
+          "choices": [
+            {
+              "text": "Implement ownership matrix, monitor cycle, and vendor risk review cadence with incident communication expectations.",
+              "nextStep": null,
+              "feedback": "This brings the program up to a minimally acceptable baseline aligned to GOVERN 2, 4, 5, and 6.",
+              "points": 7
+            },
+            {
+              "text": "Finish with only policy text and hold off on all implementation work.",
+              "nextStep": null,
+              "feedback": "Policy without execution is insufficient for production AI governance.",
+              "points": 3
+            }
+          ]
+        }
+      ],
+      "maxPoints": 40,
+      "grading": {
+        "excellent": {
+          "min": 32,
+          "message": "Excellent startup governance foundation. You set practical ownership, controls, and engagement loops in addition to policy drafting."
+        },
+        "good": {
+          "min": 20,
+          "message": "Good base. Add stronger third-party review and role clarity in execution plans to make it fully robust."
+        },
+        "needsWork": {
+          "min": 0,
+          "message": "Needs work. Rebuild with explicit accountability, DEI-informed team design, and sustained stakeholder communication."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "lessons": [
+    {
+      "id": "m8-profiles-overview",
+      "moduleId": "module-8",
+      "title": "Profiles Overview",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Profiles tailor AI RMF outcomes to organizational priorities. Use target and current profiles to plan realistic improvement roadmaps."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "Profile in practice",
+          "content": "A profile is a prioritized subset of outcomes that reflects your mission, risk appetite, and operating constraints."
+        }
+      ]
+    },
+    {
+      "id": "m8-integration-worksheet",
+      "moduleId": "module-8",
+      "title": "Integration Worksheet",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Plan how AI RMF controls integrate with existing governance, security, and compliance workflows."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "worksheet",
+          "prompt": "Capture your integration plan for the next quarter.",
+          "fields": [
+            {
+              "id": "priority",
+              "label": "Top integration priority",
+              "placeholder": "What will you implement first?"
+            },
+            {
+              "id": "owner",
+              "label": "Execution owner",
+              "placeholder": "Who is accountable?"
+            },
+            {
+              "id": "milestone",
+              "label": "Success milestone",
+              "placeholder": "How will you measure success?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m8-capstone-readiness",
+      "moduleId": "module-8",
+      "title": "Capstone Readiness",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Confirm your readiness for capstone planning by validating core governance and risk workflows."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "checkboxAnalysis",
+          "question": "Which items indicate capstone readiness? Select all that apply.",
+          "options": [
+            {
+              "id": "c1",
+              "label": "Defined accountable owners for AI risk decisions",
+              "correct": true
+            },
+            {
+              "id": "c2",
+              "label": "No documented escalation process",
+              "correct": false
+            },
+            {
+              "id": "c3",
+              "label": "Measured controls and monitoring thresholds",
+              "correct": true
+            },
+            {
+              "id": "c4",
+              "label": "Stakeholder communication plan for incidents",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

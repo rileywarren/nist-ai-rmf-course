@@ -1,0 +1,421 @@
+{
+  "lessons": [
+    {
+      "id": "m3-overview",
+      "moduleId": "module-3",
+      "title": "Overview of Trustworthy AI",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 3 of NIST AI RMF 1.0 presents trustworthiness as a practical design and governance objective, organized into seven linked characteristics in the order: Valid & Reliable, Safe, Secure & Resilient, Explainable/Interpretable, Privacy-Enhanced, Fair, with Accountable & Transparent as the governance bridge that makes trust decisions defensible. The structure is introduced as a way to help teams align technical development, organizational controls, and societal expectations rather than treating trustworthiness as a generic slogan (NIST AI RMF 1.0, Section 3.1 and Figure 3).\n\nUnlike compliance checklists that are often binary, trustworthiness in the framework is intentionally treated as a continuum. An AI system can be more or less trustworthy on any characteristic depending on context, maturity, and operating environment. This matters because AI systems usually evolve over time, and controls improve through measurable lifecycle effort."
+        },
+        {
+          "type": "text",
+          "content": "NIST frames this as *interrelated* rather than independent. A system that is safe but not transparent may still fail governance expectations if stakeholders cannot evaluate why outputs are trusted. Similarly, an accurate system may still be insufficiently trustworthy if it cannot tolerate adverse events or if affected communities cannot verify fairness outcomes.\n\nThis is where the framework’s spectrum framing matters operationally: organizations are expected to define acceptable thresholds per characteristic based on deployment criticality, legal obligations, and likely harms. For example, a lower-risk internal automation might tolerate different tradeoffs than a clinical decision support system. In this module, each lesson deepens one or two characteristics while showing where they overlap in real programs."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "Trustworthiness as an Operating Spectrum",
+          "content": "Trustworthiness is a weighted, context-dependent combination of characteristics rather than a binary pass/fail condition. A system can improve incrementally over time as evidence for reliability, safety, security, transparency, and other characteristics is strengthened."
+        },
+        {
+          "type": "text",
+          "content": "Across all seven characteristics, NIST AI RMF positions Valid & Reliable as foundational. If an AI system is not valid for its intended context or not reliable under expected conditions, stronger controls elsewhere cannot compensate for weak baseline evidence. In practice, this means TEVV, dataset quality, and operating assumptions must be established before high-level trust claims are made.\n\nAccountable and Transparent are treated as cross-cutting in governance terms. Accountability requires auditable reasoning about who is responsible, how decisions are logged, and what evidence is retained. Transparency determines what information can be opened to whom and at what level of abstraction, so that accountability is actually possible in incident response, review, and appeal contexts."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "trustworthy-characteristics",
+          "caption": "Trustworthy AI characteristics diagram (Section 3): the relationship of foundational, dependent, and cross-cutting characteristics."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "diagramExplore",
+          "instruction": "Explore each trustworthiness characteristic. Click all 7 hotspots and review the 2–3 sentence summary for each.",
+          "diagramId": "trustworthy-characteristics",
+          "hotspots": [
+            {
+              "id": "valid-reliable",
+              "label": "Valid & Reliable",
+              "content": "Valid & Reliable is the technical foundation: the model should fit its intended purpose and perform dependably over time. Validity asks whether the AI system is appropriate for the task and context; reliability asks whether behavior is consistent across expected conditions. Without this foundation, other characteristics cannot be meaningfully guaranteed."
+            },
+            {
+              "id": "safe",
+              "label": "Safe",
+              "content": "Safety focuses on preventing unacceptable physical, psychological, economic, and social harms during real use. NIST aligns this to design/deployment discipline, hazard identification, and risk prioritization where high-stakes use cases deserve stricter safeguards. A safe AI system is one with controls proportionate to potential harm severity."
+            },
+            {
+              "id": "secure-resilient",
+              "label": "Secure & Resilient",
+              "content": "Security protects against unauthorized interference, while resilience keeps the system usable or safely degrades when stress, attack, or disruption occurs. Together, these characteristics cover both prevention and damage-control in adverse events. Resilience in this sense includes robust operations under drift, faults, and partial failures."
+            },
+            {
+              "id": "explainable-interpretable",
+              "label": "Explainable & Interpretable",
+              "content": "Explainable behavior is about communicating how outcomes are produced, while interpretability is about understanding why a model behaves as it does. This pair supports informed use by technical and non-technical stakeholders. Without this clarity, users may over-trust or under-trust outputs inappropriately."
+            },
+            {
+              "id": "privacy-enhanced",
+              "label": "Privacy-Enhanced",
+              "content": "Privacy-Enhanced focuses on reducing re-identification, misuse, and function creep through controls across the lifecycle. This includes data handling, minimization, access controls, and protective technologies when data sensitivity is high. It is often the first characteristic that directly affects user trust in data stewardship."
+            },
+            {
+              "id": "fair-bias",
+              "label": "Fair",
+              "content": "Fairness concerns whether outcomes are distributed in ways that do not produce unjustified disadvantage across groups or contexts. In Section 3.7, fairness is connected to bias processes at societal, dataset, and human levels. Fairness is not a single test result; it is a governance property that requires monitoring and remediation."
+            },
+            {
+              "id": "accountable-transparent",
+              "label": "Accountable & Transparent (Cross-cutting)",
+              "content": "Accountable and Transparent cut across every other characteristic because they define who answers for failures and who can inspect evidence. This cross-cutting lens determines whether an organization can justify decisions after deployment and during incidents. Strong reporting, role-based access, and audit records are essential to make the other characteristics credible."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "style": "warning",
+          "title": "Tradeoff Guidance",
+          "content": "Tradeoffs are expected. Improving one characteristic may reduce another if constraints are unmanaged, so NIST-style governance requires documenting why choices were made and what residual risk remains."
+        }
+      ],
+      "keyTakeaways": [
+        "Section 3 presents trustworthiness as a spectrum of seven linked characteristics rather than a binary condition.",
+        "Valid & Reliable forms the baseline; without baseline validity and reliability, claims about safety, privacy, fairness, or explainability are weak.",
+        "Accountable and Transparent are cross-cutting, because they enable answerability, auditability, and meaningful appeal when harms occur.",
+        "NIST emphasizes managed tradeoffs: teams must justify why one characteristic is prioritized over another based on context, severity, and lifecycle risk."
+      ]
+    },
+    {
+      "id": "m3-valid-safe",
+      "moduleId": "module-3",
+      "title": "Valid & Reliable + Safe",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 3.1 starts with **Validation** in the sense used across standards bodies: confirmation that the AI system satisfies needs for a specific use context. NIST maps this to ISO 9000:2015-style thinking by anchoring to intended use and stakeholder requirements rather than only benchmark metrics. A model can be statistically strong yet still invalid for an operational setting if assumptions do not match real workflows.\n\nIn Section 3.1 and related appendices, **Reliability** is treated as stability over repeated use under expected conditions. ISO/IEC TS 5723:2022 emphasizes the reproducibility and predictability expected from AI outputs within the intended domain. For a TEVV workflow, reliability evidence must be explicit about limits, confidence windows, and conditions where the output quality degrades."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "ISO-aligned definitions used in this module",
+          "content": "ISO 9000:2015 defines validation as evidence-based confirmation that requirements for a specific use are met. ISO/IEC TS 5723:2022 frames reliability and related AI quality concepts as repeatability and predictable behavior under defined conditions."
+        },
+        {
+          "type": "text",
+          "content": "NIST also distinguishes **Accuracy** and **Robustness/Generalizability**. Accuracy is not a single number detached from context; it should be reported with disaggregated results by subgroup, scenario, and input slice whenever possible. ISO/IEC TS 5723:2022 encourages this disaggregation because aggregate accuracy can hide systematic failures that become severe once deployed.\n\nRobustness and generalizability are about performance when the environment shifts from the validation setup. In Section 3.2 terms, systems should remain useful across realistic variance, and still avoid overfitting to narrow test regimes. Robustness is especially important where deployment populations, sensors, protocols, or geography differ from development assumptions."
+        },
+        {
+          "type": "text",
+          "content": "Safety in the NIST model goes beyond model quality and includes how the system is built, deployed, and operated. Responsible design, development, deployment, and decommissioning practices are needed so that failure modes are anticipated and controlled early. The framework points to clear deployer information, documentation, and role alignment so that safety is an organizational behavior, not only a model property.\n\nSafety controls in high-consequence systems should be risk-prioritized, with highest attention to severe impact domains and vulnerable populations. Risk-based prioritization means you do not spend equally on every failure mode; you invest where likelihood and severity are both meaningful and where users can be directly harmed without warning."
+        },
+        {
+          "type": "callout",
+          "style": "tip",
+          "title": "Practical validity & safety approaches",
+          "content": "NIST aligns with practical controls: simulation, in-domain testing, real-time monitoring, clear human intervention paths, and safe shutdown or override mechanisms for unanticipated operation."
+        },
+        {
+          "type": "text",
+          "content": "Section 3.1 and 3.2 imply a lifecycle view of risk reduction. Early testing should include adversarially realistic scenarios, representative data slices, and deployment-conditions that mirror actual clinical, industrial, or customer environments. Ongoing monitoring is then the mechanism that identifies drift, reliability loss, and safety gaps before they compound into harm.\n\nFor high-impact deployments, the combination of clear procedures and continuous observation supports rapid mitigation. In practice, this means you should instrument systems for alerting, escalation, and temporary suspension if critical thresholds are exceeded."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "checkboxAnalysis",
+          "scenario": "MedVision AI is a diagnostic imaging system trained on data from three urban hospitals. It is being deployed to rural clinics where patient demographics, imaging equipment, and disease prevalence differ significantly from the training data. The system achieved 96% accuracy in validation testing conducted at the original hospitals. No real-time monitoring system is in place, and clinic staff received a one-page instruction sheet.",
+          "question": "Which validity and safety concerns apply to this deployment? Select all that apply.",
+          "options": [
+            {
+              "id": "c1",
+              "label": "Generalizability concerns — training data may not represent deployment context",
+              "correct": true
+            },
+            {
+              "id": "c2",
+              "label": "The system's accuracy is too low for medical use",
+              "correct": false
+            },
+            {
+              "id": "c3",
+              "label": "Lack of real-time monitoring creates safety risk",
+              "correct": true
+            },
+            {
+              "id": "c4",
+              "label": "Insufficient training for end users (clinic staff)",
+              "correct": true
+            },
+            {
+              "id": "c5",
+              "label": "No mechanism for human intervention or override",
+              "correct": true
+            },
+            {
+              "id": "c6",
+              "label": "The system violates patient privacy",
+              "correct": false
+            },
+            {
+              "id": "c7",
+              "label": "Validation testing was not conducted in conditions similar to deployment",
+              "correct": true
+            },
+            {
+              "id": "c8",
+              "label": "The system is too expensive to operate",
+              "correct": false
+            }
+          ],
+          "explanation": "The key concerns are generalizability (training data doesn't match deployment context), inadequate validation conditions, no real-time monitoring, insufficient user training, and no human override mechanism. The 96% accuracy is high, but was only measured in the training context."
+        }
+      ],
+      "keyTakeaways": [
+        "Section 3.1 ties validation to intended use; ISO 9000:2015 and TEVV practice require confirming fit-for-purpose before deployment.",
+        "Section 3.1 and ISO/IEC TS 5723:2022 show that reliability and accuracy evidence should be contextual, sliced, and disaggregated, not just aggregate percentages.",
+        "Section 3.2 requires robustness/generalizability planning so systems remain usable when operating distributions, equipment, and populations change.",
+        "Safety controls are deployment practices: risk-based prioritization, user training, human intervention, and real-time monitoring are essential for high-impact use."
+      ]
+    },
+    {
+      "id": "m3-secure-accountable",
+      "moduleId": "module-3",
+      "title": "Secure & Resilient + Accountable & Transparent",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 3.3 combines security and resilience as a deployment-first expectation. Security concerns in NIST guidance include direct and indirect attack surfaces where model behavior can be manipulated or extracted, or where data pipelines can be subtly corrupted. For AI systems, security therefore includes model, data, and infrastructure layers, not just network hardening.\n\nAdversarial examples and data poisoning are practical examples of threats that can shift outputs without obvious software changes. A small, targeted perturbation in input can produce large output errors, while poisoning attacks can poison training or feedback channels in ways that look like normal operations. Resilience planning requires anticipating these pathways and defining containment and response controls before an event."
+        },
+        {
+          "type": "text",
+          "content": "NIST also highlights **model exfiltration** as a serious risk in operational environments, where model internals, embeddings, or unique behavioral fingerprints can be probed and copied. This can create IP, privacy, and downstream abuse risks, especially in high-value domains. In secure design patterns, hardening includes controlled access, logging, watermarking strategies, and policy controls around model use.\n\nTo align with broader enterprise practice, Section 3.4 references the NIST Cybersecurity Framework (CSF) concepts: identify, protect, detect, respond, and recover as a coherent control loop. The point is not only to prevent incidents but to preserve trust when incidents occur. Resilience in this sense means graceful degradation, containment, and recovery that protects people and organizational continuity."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "Resilience under stress",
+          "content": "Resilience means the AI system can withstand adverse events and continue to operate safely or degrade safely when failure conditions emerge. It includes fallback procedures, manual override, and clear incident ownership."
+        },
+        {
+          "type": "text",
+          "content": "Transparent operations in this section are role- and knowledge-based. Not every stakeholder needs every internal control detail, but those who need to operate, audit, oversee, or challenge outputs must be able to access meaningful evidence. This includes provenance of training data, model update history, and documentation of known limitations.\n\nAccountability presupposes transparency. If incident records, decision logs, and governance rationale are incomplete, accountability becomes rhetorical rather than operational. In high consequence systems, transparency should be proportionate to impact: more severe domains (e.g., public safety, health, critical infrastructure) require deeper and faster disclosure paths to auditors and affected users."
+        },
+        {
+          "type": "text",
+          "content": "Section 3.3 and 3.4 also make training provenance central to trustworthiness. NIST expects organizations to be able to answer where data came from, what transformations were applied, and what assumptions were made around representativeness. That provenance trail supports both security investigations and fairness/safety reinterpretations during incidents.\n\nThe practical lesson is to design a single governance stack that combines cybersecurity controls with accountability mechanisms. Separate security controls reduce technical attack exposure, while transparency and role-based information rights make outcomes reviewable when something goes wrong."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "checkboxAnalysis",
+          "scenario": "AtlasAssist, a customer service chatbot deployed by a bank, handles thousands of card-dispute cases nightly. A competitor recently discovered a prompt pattern that can reveal internal policies, and several trainees were allowed to auto-approve refunds when the bot confidence score was high. Incident logs are incomplete because deployment happened quickly last quarter, and only one analyst can access raw chat transcripts. The model was retrained with customer feedback that may include maliciously manipulated entries.",
+          "question": "Which secure, resilient, accountable, or transparency risks are present? Select all that apply.",
+          "options": [
+            {
+              "id": "s1",
+              "label": "Adversarial prompt leakage can increase policy exposure and unauthorized behavior",
+              "correct": true
+            },
+            {
+              "id": "s2",
+              "label": "Automatic approvals from confidence scores can silently weaken resilience when failures spike",
+              "correct": true
+            },
+            {
+              "id": "s3",
+              "label": "Single-person access to logs supports stronger accountability",
+              "correct": false
+            },
+            {
+              "id": "s4",
+              "label": "Model retraining with unvetted feedback can introduce data poisoning",
+              "correct": true
+            },
+            {
+              "id": "s5",
+              "label": "Lack of training data provenance does not matter once logs are present",
+              "correct": false
+            },
+            {
+              "id": "s6",
+              "label": "Limited logging access can block audit, appeal, and role-based transparency obligations",
+              "correct": true
+            },
+            {
+              "id": "s7",
+              "label": "The system is resilient if it shuts down only after a critical outage is confirmed by legal",
+              "correct": true
+            },
+            {
+              "id": "s8",
+              "label": "No immediate shutdown path is acceptable if model performance is currently high",
+              "correct": false
+            }
+          ],
+          "explanation": "The scenario shows multiple compounding risks: prompt-based policy exposure, weak confidence-only automation, potential poisoning through unfiltered feedback, and restricted audit visibility. For resilience and accountability, incomplete logs and weak shutdown paths undermine the ability to contain harm quickly."
+        }
+      ],
+      "keyTakeaways": [
+        "Section 3.3 security risks include adversarial examples, poisoning, and model exfiltration, so controls must cover models, data, and serving infrastructure.",
+        "Section 3.3 and 3.4 tie security controls to resilient operation: systems should degrade safely and recover under adverse events.",
+        "Transparency should be role- and knowledge-based, with stronger disclosure where harm severity is higher, especially for audit, oversight, and appeal pathways.",
+        "Accountability depends on provenance, complete logging, and practical shutdown/override procedures; without these, transparent governance is not actually enforceable."
+      ]
+    },
+    {
+      "id": "m3-explain-privacy",
+      "moduleId": "module-3",
+      "title": "Explainable & Interpretable + Privacy-Enhanced",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 3.5 distinguishes three related ideas: explainability, interpretability, and transparency. Explainability is often framed as how model outputs are described and communicated in operational terms. Interpretability is deeper: why a prediction took a particular path, and whether humans can identify assumptions in that reasoning.\n\nTransparency, in turn, is the broader condition of information availability and intelligibility for stakeholders. A model may be interpretable internally, but if explanations are not presented in the right language to the right audience, transparency is still ineffective. NIST treats these as distinct but related so teams can measure and improve each dimension separately."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "How the three differ",
+          "content": "Explainable AI focuses on communicating outputs and mechanisms. Interpretability addresses understanding of why specific outputs occur. Transparency is the governance channel through which explainability and interpretability are made available to stakeholders based on role and impact."
+        },
+        {
+          "type": "text",
+          "content": "Section 3.6 introduces privacy as a trustworthiness characteristic with concrete controls aligned to human-centered norms such as autonomy, identity, and dignity. In practical terms, privacy is not only about legal compliance; it is about whether data practices preserve individuals' ability to understand and consent to how their data is used. PETs (privacy-enhancing technologies), data minimization, and de-identification are tools to do this in technical systems.\n\nThe standard tension is that heavy privacy controls can reduce available signal, while high-volume data retention can increase utility but also social risk. For AI teams, this means privacy design must be explicit about risk appetite and acceptable model impact, especially where sensitive data exists. In regulated or high-sensitivity use cases, weaker utility may be the right tradeoff."
+        },
+        {
+          "type": "text",
+          "content": "NIST and related standards also surface a key point about data sparsity: when privacy limits collected features, model performance can drop because the training corpus is less informative. This is not a reason to reject privacy, but a reason to design for governance-aware tradeoffs early. If interpretability requirements and strict privacy are both high, expected performance may need to be calibrated accordingly.\n\nThat calibration is exactly the point of TEVV and stakeholder review: teams should document tradeoffs openly, define when reduced accuracy is acceptable, and specify monitoring mechanisms when thresholds are crossed. This converts a technical tension into an accountable governance decision."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "tradeoffSlider",
+          "instruction": "Adjust the sliders to explore tradeoffs between privacy, accuracy, and interpretability. Watch how changing one affects the others.",
+          "sliders": [
+            {
+              "id": "privacy",
+              "label": "Privacy Protection",
+              "default": 50
+            },
+            {
+              "id": "accuracy",
+              "label": "Predictive Accuracy",
+              "default": 50
+            },
+            {
+              "id": "interpretability",
+              "label": "Interpretability",
+              "default": 50
+            }
+          ],
+          "tradeoffRules": [
+            {
+              "when": "privacy > 75",
+              "effect": "accuracy decreases",
+              "explanation": "Strong privacy techniques like differential privacy or data minimization can reduce the amount of useful signal in training data, lowering accuracy."
+            },
+            {
+              "when": "accuracy > 75",
+              "effect": "interpretability decreases",
+              "explanation": "The most accurate models (deep neural networks) tend to be less interpretable. Simpler, more interpretable models often sacrifice some accuracy."
+            },
+            {
+              "when": "interpretability > 75",
+              "effect": "accuracy decreases",
+              "explanation": "Highly interpretable models (decision trees, linear models) are often less accurate than complex models on challenging tasks."
+            },
+            {
+              "when": "privacy > 75 && interpretability > 75",
+              "effect": "accuracy significantly decreases",
+              "explanation": "Combining strong privacy protection with high interpretability requirements constrains model choices, often resulting in notable accuracy loss."
+            }
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Section 3.5 separates explanation, interpretability, and transparency so governance can target each explicitly.",
+        "Section 3.6 ties privacy to autonomy, identity, and dignity in addition to compliance-oriented risk reduction.",
+        "Privacy and accuracy tradeoffs should be explicit when data sparsity is present; controls can constrain model signal quality.",
+        "PETs, data minimization, and de-identification should be selected based on the same trustworthiness criteria used for performance and safety."
+      ]
+    },
+    {
+      "id": "m3-fair-bias",
+      "moduleId": "module-3",
+      "title": "Fair – with Harmful Bias Managed",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 3.7 addresses fairness through the broader lens of **harmful bias** and how it can appear in AI systems. NIST identifies three bias categories: systemic, computational/statistical, and human-cognitive. A core point in the section is that bias can be produced by technical pipelines even when no individual actor intends to discriminate.\n\nBecause AI systems are often faster and more scalable than manual processes, small errors or uneven historical patterns can be amplified across large populations. This is why fairness work in NIST is framed as a continuous lifecycle practice: pre-deployment design, ongoing monitoring, and post-incident adjustment. Fairness is therefore less about proving perfect equality and more about reducing avoidable, unjustified harm."
+        },
+        {
+          "type": "text",
+          "content": "Systemic bias originates in social, historical, or organizational structures embedded in data and outcomes. Computational/statistical bias refers to model assumptions, sampling imbalance, and feature handling that produce unequal error rates across groups. Human-cognitive bias includes overreliance, framing effects, and expectation biases from developers, deployers, or operators.\n\nThese categories are not exclusive; a hiring AI can combine all three if historical imbalance (systemic), unrepresentative training features (computational), and interviewer override habits (human-cognitive) interact. NIST’s framing emphasizes this layered nature because single-point fixes often miss the underlying source."
+        },
+        {
+          "type": "callout",
+          "style": "info",
+          "title": "Fairness vs bias mitigation",
+          "content": "Mitigating bias means reducing harmful impacts while preserving legitimate mission goals, not only removing all statistical differences. The task is to align systems with rights-based outcomes and documented social expectations."
+        },
+        {
+          "type": "text",
+          "content": "Section 3.7 is aligned with broader U.S. fairness work including NIST SP 1270 principles around measurable and actionable fairness outcomes. The standard also notes that fairness and risk tolerance are context dependent: a high-stakes setting may demand stricter controls, more explainability, and stronger governance intervention windows.\n\nAs AI systems scale, fairness failures can become systemic very quickly. The practical implication for TEVV teams is that mitigation plans should include baseline bias diagnosis, periodic remeasurement, and deployment-level accountability for remediation speed."
+        },
+        {
+          "type": "text",
+          "content": "In this lesson exercise, users classify scenarios into the three bias categories, then connect each scenario to mitigation opportunities. Human training, data strategy, and model architecture are all points of intervention. No category is a substitute for another; each controls only a slice of the fairness problem.\n\nWhen building a fair AI system, combine technical metrics with community-informed governance. The strongest results come from coupling quantitative tests with role-based review and transparent reporting when risk thresholds are crossed."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "dragDrop",
+          "instruction": "Classify each scenario by the primary type of bias it illustrates.",
+          "items": [
+            {
+              "id": "b1",
+              "label": "A hiring AI trained on historical data perpetuates past gender imbalances in tech roles"
+            },
+            {
+              "id": "b2",
+              "label": "A facial recognition system has higher error rates for darker skin tones due to unbalanced training data"
+            },
+            {
+              "id": "b3",
+              "label": "A loan officer over-relies on an AI credit score, ignoring contextual factors the model doesn't capture"
+            },
+            {
+              "id": "b4",
+              "label": "A healthcare algorithm uses insurance spending as a proxy for health needs, disadvantaging groups with less access to care"
+            },
+            {
+              "id": "b5",
+              "label": "A developer assumes their AI chatbot's users are all English-speaking, not testing for multilingual contexts"
+            },
+            {
+              "id": "b6",
+              "label": "A survey used to validate an AI model underrepresents rural communities due to its online-only distribution"
+            }
+          ],
+          "zones": [
+            {
+              "id": "systemic",
+              "label": "Systemic Bias",
+              "correctItems": ["b1", "b4"]
+            },
+            {
+              "id": "computational",
+              "label": "Computational / Statistical Bias",
+              "correctItems": ["b2", "b6"]
+            },
+            {
+              "id": "human-cognitive",
+              "label": "Human-Cognitive Bias",
+              "correctItems": ["b3", "b5"]
+            }
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Section 3.7 identifies three primary bias types: systemic, computational/statistical, and human-cognitive, and any one incident may involve multiple layers.",
+        "Bias can occur without malicious intent or explicit prejudice, so controls must address structural and technical design conditions.",
+        "AI at speed and scale can amplify minor data and process inequities, making lifecycle monitoring mandatory in production deployments.",
+        "NIST SP 1270 informs practical fairness work by emphasizing measurable, auditable, and corrective fairness actions rather than one-time checks."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "lessons": [
+    {
+      "id": "m2-actors",
+      "moduleId": "module-2",
+      "title": "AI Actors and Roles",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 2 of *NIST AI RMF 1.0* opens with a practical governance lens: who is involved in an AI system and where. The Framework uses the OECD-style notion of AI actors as *those who play an active role in the AI system lifecycle, including organizations and individuals that deploy or operate AI*. This is a rights-anchored and lifecycle-aware framing rather than a role-only definition, because it binds responsibility to real activity in planning, development, deployment, and operation (NIST AI RMF 1.0, Section 2).\n\nThat shift matters because it prevents risk work from collapsing to either technical teams only or legal teams only. Instead, governance is distributed across organizational units and external actors who influence how the system is built, used, interpreted, and corrected. If your team maps these actors explicitly, discussion moves from abstract accountability to concrete checkpoints."
+        },
+        {
+          "type": "text",
+          "content": "NIST distinguishes between a **primary audience** and an **informing audience** in the People & Planet dimension. The primary audience is the set of actors with direct decision authority, implementation responsibility, and operational control over the AI system. They are the ones who can define requirements, allocate resources, and enforce changes in design, policy, and practice.\n\nThe informing audience, by contrast, does not always have direct authority but has critical influence. In Section 2, the informing audience includes trade associations, standards developing organizations, researchers, advocacy groups, environmental groups, civil society organizations, end users, and potentially impacted individuals and communities. Their role is to surface perspectives that primary builders may miss, especially around social, ethical, and long-horizon impacts (NIST AI RMF 1.0, Section 2)."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "What informing actors do",
+          "content": "Informing actors can provide context, function as sources of norms and expectations, help designate boundaries for appropriate use, and promote discussion of tradeoffs among benefits, harms, legal obligations, and societal expectations. This broadens risk management from internal compliance to community- and sector-level trustworthiness (NIST AI RMF 1.0, Section 2)."
+        },
+        {
+          "type": "text",
+          "content": "NIST repeatedly emphasizes that inclusive and diverse teams improve lifecycle decisions. Diverse teams are better at identifying edge conditions, hidden assumptions, and potential harms because they combine technical, operational, regulatory, and lived-experience perspectives. That is especially important in AI projects where unexamined assumptions can become embedded in data pipelines, features, and model behavior.\n\nThe People and Planet perspective in the Framework is not an optional ethics add-on. It is the center point for risk reasoning because the quality of outcomes for people and the wider social and environmental context determines whether an AI system is truly trustworthy. In practice, this means teams should intentionally invite input from affected communities, not only from internal stakeholders, before and during deployment."
+        },
+        {
+          "type": "text",
+          "content": "The actor model also clarifies that accountability in AI is multi-layered and not limited to a single role. One actor might train a model, another validate it, and another operate it in a high-impact workflow. Another may be legally responsible for governance and still another may be the one most affected by outcomes. NIST’s architecture avoids the false binary of owner vs. user by defining a set of role-based responsibilities throughout the lifecycle (NIST AI RMF 1.0, Section 2).\n\nWhen organizations internalize this model, they can use governance bodies to inspect role coverage gaps, avoid concentration of power, and prevent weak controls created by overly narrow ownership models. That is one reason the Framework recommends early alignment on responsibilities before model development accelerates."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "dragDrop",
+          "instruction": "Match each description to the correct AI actor role.",
+          "items": [
+            {"id": "a1", "label": "Provides expertise about the industry where AI is deployed"},
+            {"id": "a2", "label": "Cleans, validates, and documents training datasets"},
+            {"id": "a3", "label": "Creates and trains ML models"},
+            {"id": "a4", "label": "Tests, evaluates, verifies, and validates AI systems"},
+            {"id": "a5", "label": "Integrates AI into production systems"},
+            {"id": "a6", "label": "Uses the AI system in their daily work"},
+            {"id": "a7", "label": "Affected by AI system decisions but may not directly use it"},
+            {"id": "a8", "label": "Has fiduciary and legal authority over AI governance"}
+          ],
+          "zones": [
+            {"id": "domain-expert", "label": "Domain Expert", "correctItems": ["a1"]},
+            {"id": "data-engineer", "label": "Data Engineer", "correctItems": ["a2"]},
+            {"id": "ml-developer", "label": "ML Developer", "correctItems": ["a3"]},
+            {"id": "tevv-expert", "label": "TEVV Expert", "correctItems": ["a4"]},
+            {"id": "deployer", "label": "System Integrator / Deployer", "correctItems": ["a5"]},
+            {"id": "end-user", "label": "End User", "correctItems": ["a6"]},
+            {"id": "affected", "label": "Affected Individual / Community", "correctItems": ["a7"]},
+            {"id": "governance", "label": "Governance & Oversight", "correctItems": ["a8"]}
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "NIST and OECD-aligned actor definitions in Section 2 treat actors as anyone with an active role across planning, development, deployment, and operation, not only model builders (NIST AI RMF 1.0, Section 2).",
+        "Primary audience actors are decision and implementation leaders; informing actors provide context, norms, and boundary-setting that improve trustworthiness outcomes (NIST AI RMF 1.0, Section 2).",
+        "Informing actors include trade associations, standards groups, researchers, advocacy and civil society organizations, environmental groups, end users, and impacted people/communities.",
+        "The People & Planet lens and actor diversity reduce blind spots by ensuring risk is considered from lived and societal impacts, not just technical performance metrics."
+      ]
+    },
+    {
+      "id": "m2-lifecycle",
+      "moduleId": "module-2",
+      "title": "The AI System Lifecycle",
+      "sections": [
+        {
+          "type": "text",
+          "content": "Section 2 presents the OECD-based lifecycle framework adapted by NIST in Figure 2, then contextualizes it for governance and trustworthiness workflows. Rather than a simple waterfall, this model shows AI as a sequence of linked lifecycle stages with technical work, legal expectations, operational controls, and human oversight all interacting over time (NIST AI RMF 1.0, Section 2; Figure 2).\n\nIn practice, this means governance teams should define lifecycle checkpoints before teams finalize model architecture. A lifecycle-first approach helps teams see where controls belong and where evidence should be generated. If evidence is only collected at one point, especially after deployment, it is often too late to change upstream design decisions."
+        },
+        {
+          "type": "text",
+          "content": "The six stages in this model are: **Plan and Design**, **Collect and Process Data**, **Build and Use Model**, **Verify and Validate**, **Deploy and Use**, and **Operate and Monitor**. Each stage contributes to the trustworthiness picture and has distinct actors, artifacts, and controls. The sequence also reflects the idea that risk management is an evolving practice, not a one-time sign-off activity.\n\nFor example, requirements and assumptions are clarified during Plan and Design, while continuous operational risk becomes most visible in Operate and Monitor. NIST frames this as explicit continuity, reinforcing that good governance requires design evidence, process evidence, and monitoring evidence over time (NIST AI RMF 1.0, Section 2, Figure 2)."
+        },
+        {
+          "type": "callout",
+          "style": "info",
+          "title": "Core lifecycle dimensions",
+          "content": "NIST uses four central dimensions in the lifecycle view: Application Context, Data and Input, AI Model, and Task and Output. People and Planet sits at the center as the governing lens for all decisions."
+        },
+        {
+          "type": "text",
+          "content": "Each dimension contributes a different set of governance questions. **Application Context** asks why and where the system is used, including use case boundaries and environmental constraints. **Data and Input** focuses on provenance, representativeness, quality, and suitability. **AI Model** focuses on algorithmic integrity and behavior, and **Task and Output** checks what the system is supposed to do and what it actually delivers.\n\nBy separating these dimensions, teams avoid conflating a high-performing model with a trustworthy deployment. A model can be accurate in benchmark tests, yet fail against requirements for fairness, explainability, safety, or long-term societal impact when the context and outputs are mis-specified (NIST AI RMF 1.0, Section 2)."
+        },
+        {
+          "type": "text",
+          "content": "People and Planet is positioned at the center because NIST treats human rights, social impact, and ecological effects as a continuous quality target across all lifecycle activities. It is not only a final review stage; it is a decision filter at each stage. This directly reflects the Framework’s broader goal of balancing innovation with public trust and accountability.\n\nWhen people and planet concerns are treated as central, teams are more likely to escalate ethical questions in early design, not after incidents occur. The framework therefore improves both pre-deployment controls and post-deployment learning by making the impact baseline explicit from the first stage onward (NIST AI RMF 1.0, Section 2)."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "ai-lifecycle",
+          "caption": "NIST AI RMF Figure 2 lifecycle view: Plan and Design, Collect and Process Data, Build and Use Model, Verify and Validate, Deploy and Use, Operate and Monitor with core dimensions and People & Planet at the center."
+        },
+        {
+          "type": "text",
+          "content": "The Framework also states that risk management starts in **Plan and Design** and continues through every later stage. This is a core design principle. Risk posture is never fully settled after initial model training because new risks can emerge from changing data distributions, user behavior, process drift, and environmental conditions.\n\nOperational monitoring therefore becomes a control function, not a reporting activity. Evidence collected in collection, development, deployment, and operations should be interpreted against the same trustworthiness objectives set during planning so that the organization can detect when risks become unacceptable and respond proportionately (NIST AI RMF 1.0, Section 2)."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "diagramExplore",
+          "diagramId": "ai-lifecycle",
+          "instruction": "Click on each lifecycle stage and dimension to learn more. Explore all 11 areas to complete this activity.",
+          "hotspots": [
+            {"id": "plan-design", "label": "Plan and Design", "content": "Articulate the system's concept and objectives, underlying assumptions, context, and requirements in light of legal, regulatory, and ethical considerations."},
+            {"id": "collect-process", "label": "Collect and Process Data", "content": "Gather, validate, and document the metadata and characteristics of the dataset in light of objectives, legal, and ethical considerations."},
+            {"id": "build-use", "label": "Build and Use Model", "content": "Create or select algorithms, train models. TEVV includes model testing."},
+            {"id": "verify-validate", "label": "Verify and Validate", "content": "Verify and validate, calibrate, and interpret model output. Ideally performed by actors separate from those who built the model."},
+            {"id": "deploy-use", "label": "Deploy and Use", "content": "Pilot, check compatibility with legacy systems, verify regulatory compliance, manage organizational change, and evaluate user experience."},
+            {"id": "operate-monitor", "label": "Operate and Monitor", "content": "Operate the AI system and continuously assess its output and impacts (both intended and unintended) in light of objectives, legal, and ethical considerations."},
+            {"id": "app-context", "label": "Application Context", "content": "The setting in which the AI system operates, including the specific use case, regulatory environment, and stakeholder landscape."},
+            {"id": "data-input", "label": "Data and Input", "content": "The data used to train, validate, and operate the AI system, including its provenance, quality, and representativeness."},
+            {"id": "ai-model", "label": "AI Model", "content": "The algorithms and models that process inputs to generate outputs. Includes model building/training and separate verification/validation."},
+            {"id": "task-output", "label": "Task and Output", "content": "The specific tasks the AI system performs and the outputs it generates (predictions, recommendations, decisions)."},
+            {"id": "people-planet", "label": "People and Planet", "content": "Represents human rights and the broader well-being of society and the planet. The central consideration for all AI lifecycle activities."}
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Section 2’s Figure 2 lifecycle model (adapted from OECD framing) organizes governance across six stages: Plan and Design; Collect and Process Data; Build and Use Model; Verify and Validate; Deploy and Use; Operate and Monitor.",
+        "People and Planet is the center of the lifecycle model, so social, rights-based, and ecological considerations must be integrated at every stage, not added after deployment (NIST AI RMF 1.0, Section 2, Figure 2).",
+        "The four dimensions—Application Context, Data and Input, AI Model, and Task and Output—help teams isolate where risks originate and where controls should be applied.",
+        "Risk management is continuous: it starts in Plan and Design and is sustained through monitoring and periodic remediation across the full lifecycle (NIST AI RMF 1.0, Section 2)."
+      ]
+    },
+    {
+      "id": "m2-tevv",
+      "moduleId": "module-2",
+      "title": "TEVV Throughout the Lifecycle",
+      "sections": [
+        {
+          "type": "text",
+          "content": "NIST treats **TEVV**—Test, Evaluation, Verification, and Validation—as a lifecycle activity rather than a one-time technical event. In the AI RMF context, this distinction supports a disciplined approach to risk reduction: tests identify whether a system works under expected conditions, evaluation compares outputs against criteria, verification checks implementation fidelity and requirements adherence, and validation confirms suitability for intended use.\n\nThis matters because these are often used interchangeably in practice, which can hide gaps. For governance, clarity on each component allows teams to define who should perform which activity and when evidence will be considered sufficient for each lifecycle checkpoint (NIST AI RMF 1.0, Section 2; Appendix A references on lifecycle guidance)."
+        },
+        {
+          "type": "callout",
+          "style": "definition",
+          "title": "TEVV across lifecycle stages",
+          "content": "NIST Appendix A describes TEVV emphasis by phase: design validates assumptions, development centers on model validation, deployment includes system validation and regulatory verification, and operations uses monitoring, incident tracking, and recalibration based on SME review."
+        },
+        {
+          "type": "text",
+          "content": "In the **Plan and Design** phase, TEVV is most useful for validating assumptions: Are success criteria, fairness boundaries, and failure modes explicitly stated? Do legal and policy requirements align with the planned use? Teams should ensure assumptions are recorded so that later changes are auditable.\n\nDuring **Collect and Process Data**, internal and external validation of input quality becomes critical. Weak metadata, poor coverage, or inconsistent preprocessing can undermine an otherwise sound model and create downstream risks that are difficult to correct later (NIST AI RMF 1.0, Section 2; Appendix A)."
+        },
+        {
+          "type": "text",
+          "content": "In **Build and Use Model**, model validation and assessment check performance, robustness, and reliability as functions of the model behavior itself. This stage is where developers often focus on benchmark scores, but NIST encourages explicit documentation of limitations and uncertainty.\n\nFor **Deploy and Use**, TEVV includes system integration testing and regulatory compliance verification. This is where cross-system compatibility, human workflows, auditability, and legal readiness are tested together. If a model performs well in isolation but causes incorrect behavior in production workflows, deployment TEVV catches those integration risks early enough for fixes."
+        },
+        {
+          "type": "text",
+          "content": "In **Operate and Monitor**, TEVV shifts toward ongoing monitoring, incident tracking, and recalibration informed by subject-matter experts. Emergent behaviors, fairness drift, and unexpected operational impacts are most likely to appear here, so continuous evidence collection is essential.\n\nA key best practice from the Framework is to separate teams that build or primarily use models from teams that verify and validate them. This independence reduces confirmation bias and improves the credibility of results. It also aligns with internal controls and assurance expectations in regulated environments (NIST AI RMF 1.0, Section 2)."
+        },
+        {
+          "type": "callout",
+          "style": "tip",
+          "title": "Why TEVV enables stronger lifecycle risk management",
+          "content": "TEVV supports mid-course remediation and post-hoc risk management by turning lifecycle execution into a learning system: findings can trigger model updates, retraining, process changes, or policy adjustments before harm accumulates."
+        },
+        {
+          "type": "interactive",
+          "interactiveType": "dragDrop",
+          "instruction": "Drag each TEVV activity to the correct lifecycle stage.",
+          "items": [
+            {"id": "t1", "label": "Validate assumptions for system design"},
+            {"id": "t2", "label": "Internal and external data validation"},
+            {"id": "t3", "label": "Model validation and assessment"},
+            {"id": "t4", "label": "System integration testing"},
+            {"id": "t5", "label": "Regulatory compliance verification"},
+            {"id": "t6", "label": "Ongoing monitoring and incident tracking"},
+            {"id": "t7", "label": "SME recalibration of models"},
+            {"id": "t8", "label": "Detection of emergent properties"}
+          ],
+          "zones": [
+            {"id": "design", "label": "Plan & Design", "correctItems": ["t1"]},
+            {"id": "data", "label": "Collect & Process Data", "correctItems": ["t2"]},
+            {"id": "build", "label": "Build & Use Model", "correctItems": ["t3"]},
+            {"id": "deploy", "label": "Deploy & Use", "correctItems": ["t4", "t5"]},
+            {"id": "operate", "label": "Operate & Monitor", "correctItems": ["t6", "t7", "t8"]}
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "TEVV in Section 2 is lifecycle-oriented: assumptions, model behavior, system-level conformance, and operational stability are tested at different stages.",
+        "Design and development TEVV primarily validate assumptions and model performance, while deployment and operations focus on integration, compliance, monitoring, and recalibration (NIST AI RMF 1.0, Section 2, Appendix A).",
+        "Separating model builders from TEVV teams strengthens assurance by reducing bias and improving confidence in verification outcomes.",
+        "TEVV findings enable both mid-course remediation and post-hoc risk treatment by converting lifecycle signals into governance action decisions (NIST AI RMF 1.0, Section 2)."
+      ]
+    }
+  ]
+}

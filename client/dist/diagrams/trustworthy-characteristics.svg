@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200" role="img" aria-labelledby="title desc">
+  <title id="title">NIST AI RMF Trustworthy Characteristics</title>
+  <desc id="desc">Block diagram showing trustworthy AI characteristics with foundation and accountability bar.</desc>
+
+  <style>
+    .hotspot {
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .hotspot:hover {
+      opacity: 0.85;
+    }
+    .label {
+      fill: #ffffff;
+      font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+    }
+  </style>
+
+  <g class="hotspot" data-hotspot-id="valid-reliable">
+    <rect x="0" y="120" width="700" height="70" fill="#6c757d" />
+    <text class="label" x="350" y="155" font-size="28" font-weight="600">Valid &amp; Reliable</text>
+  </g>
+
+  <g class="hotspot" data-hotspot-id="safe">
+    <rect x="10" y="15" width="113.6" height="95" fill="#0071bc" rx="2" />
+    <text class="label" x="66.8" y="62.5" font-size="20" font-weight="600">Safe</text>
+  </g>
+
+  <g class="hotspot" data-hotspot-id="secure-resilient">
+    <rect x="131.6" y="15" width="113.6" height="95" fill="#005ea2" rx="2" />
+    <text class="label" x="188.4" y="54" font-size="14" font-weight="600">
+      <tspan x="188.4" dy="0">Secure &amp;</tspan>
+      <tspan x="188.4" dy="18">Resilient</tspan>
+    </text>
+  </g>
+
+  <g class="hotspot" data-hotspot-id="explainable-interpretable">
+    <rect x="253.2" y="15" width="113.6" height="95" fill="#02bfe7" rx="2" />
+    <text class="label" x="310" y="52" font-size="13" font-weight="600">
+      <tspan x="310" dy="0">Explainable &amp;</tspan>
+      <tspan x="310" dy="17">Interpretable</tspan>
+    </text>
+  </g>
+
+  <g class="hotspot" data-hotspot-id="privacy-enhanced">
+    <rect x="374.8" y="15" width="113.6" height="95" fill="#00a6d2" rx="2" />
+    <text class="label" x="431.6" y="62.5" font-size="15" font-weight="600">Privacy-Enhanced</text>
+  </g>
+
+  <g class="hotspot" data-hotspot-id="fair-bias">
+    <rect x="496.4" y="15" width="113.6" height="95" fill="#0081a7" rx="2" />
+    <text class="label" x="553.2" y="44" font-size="12.5" font-weight="600">
+      <tspan x="553.2" dy="0">Fair - With</tspan>
+      <tspan x="553.2" dy="16">Harmful Bias</tspan>
+      <tspan x="553.2" dy="16">Managed</tspan>
+    </text>
+  </g>
+
+  <g class="hotspot" data-hotspot-id="accountable-transparent">
+    <rect x="620" y="0" width="80" height="200" fill="#003366" />
+    <text class="label" x="660" y="100" font-size="18" font-weight="600" transform="rotate(-90 660 100)">
+      Accountable &amp; Transparent
+    </text>
+  </g>
+</svg>

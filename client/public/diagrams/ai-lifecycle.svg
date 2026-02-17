@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">AI System Lifecycle Diagram</title>
+  <desc id="desc">Circular AI lifecycle with outer lifecycle stages, inner key dimensions, and center people and planet.</desc>
+
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#001f3f" flood-opacity="0.25"/>
+    </filter>
+
+    <marker id="flowArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#003366"/>
+    </marker>
+
+    <style>
+      text {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+      }
+
+      .hotspot {
+        cursor: pointer;
+      }
+
+      .segment {
+        transition: opacity 180ms ease, filter 180ms ease;
+        filter: url(#softShadow);
+      }
+
+      .hotspot:hover .segment {
+        opacity: 0.9;
+      }
+
+      .outer-label {
+        fill: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .inner-label {
+        fill: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .center-label {
+        fill: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+
+  <g id="outer-ring">
+    <g class="hotspot" data-hotspot-id="plan-design">
+      <path class="segment" fill="#0071bc" d="M 67.87 143.43 A 280 280 0 0 1 280.47 20.68 L 285.35 90.51 A 210 210 0 0 0 125.9 182.57 Z"/>
+      <text class="outer-label" x="177.5" y="80">
+        <tspan x="177.5" dy="0">Plan and</tspan>
+        <tspan x="177.5" dy="16">Design</tspan>
+      </text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="collect-process">
+      <path class="segment" fill="#0071bc" d="M 319.53 20.68 A 280 280 0 0 1 532.13 143.43 L 474.1 182.57 A 210 210 0 0 0 314.65 90.51 Z"/>
+      <text class="outer-label" x="422.5" y="80">
+        <tspan x="422.5" dy="0">Collect and</tspan>
+        <tspan x="422.5" dy="16">Process Data</tspan>
+      </text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="build-use">
+      <path class="segment" fill="#0071bc" d="M 551.66 177.26 A 280 280 0 0 1 551.66 422.74 L 488.75 392.06 A 210 210 0 0 0 488.75 207.94 Z"/>
+      <text class="outer-label" x="533" y="292">
+        <tspan x="533" dy="0">Build and</tspan>
+        <tspan x="533" dy="16">Use</tspan>
+        <tspan x="533" dy="16">Model</tspan>
+      </text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="verify-validate">
+      <path class="segment" fill="#0071bc" d="M 532.13 456.57 A 280 280 0 0 1 319.53 579.32 L 314.65 509.49 A 210 210 0 0 0 474.1 417.43 Z"/>
+      <text class="outer-label" x="422.5" y="510">
+        <tspan x="422.5" dy="0">Verify and</tspan>
+        <tspan x="422.5" dy="16">Validate</tspan>
+      </text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="deploy-use">
+      <path class="segment" fill="#0071bc" d="M 280.47 579.32 A 280 280 0 0 1 67.87 456.57 L 125.9 417.43 A 210 210 0 0 0 285.35 509.49 Z"/>
+      <text class="outer-label" x="177.5" y="510">
+        <tspan x="177.5" dy="0">Deploy</tspan>
+        <tspan x="177.5" dy="16">and Use</tspan>
+      </text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="operate-monitor">
+      <path class="segment" fill="#0071bc" d="M 48.34 422.74 A 280 280 0 0 1 48.34 177.26 L 111.25 207.94 A 210 210 0 0 0 111.25 392.06 Z"/>
+      <text class="outer-label" x="67" y="292">
+        <tspan x="67" dy="0">Operate</tspan>
+        <tspan x="67" dy="16">and</tspan>
+        <tspan x="67" dy="16">Monitor</tspan>
+      </text>
+    </g>
+  </g>
+
+  <g id="flow-arrows" fill="none" stroke="#003366" stroke-width="3" marker-end="url(#flowArrow)">
+    <path d="M 282.91 55.6 A 245 245 0 0 1 317.09 55.6"/>
+    <path d="M 503.11 163.0 A 245 245 0 0 1 520.2 192.6"/>
+    <path d="M 520.2 407.4 A 245 245 0 0 1 503.11 437.0"/>
+    <path d="M 317.09 544.4 A 245 245 0 0 1 282.91 544.4"/>
+    <path d="M 96.89 437.0 A 245 245 0 0 1 79.8 407.4"/>
+    <path d="M 79.8 192.6 A 245 245 0 0 1 96.89 163.0"/>
+  </g>
+
+  <g id="inner-ring">
+    <g class="hotspot" data-hotspot-id="app-context">
+      <path class="segment" fill="#02bfe7" d="M 175.35 156.61 A 190 190 0 0 1 424.65 156.61 L 385.29 201.89 A 130 130 0 0 0 214.71 201.89 Z"/>
+      <text class="inner-label" x="300" y="138">Application Context</text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="data-input">
+      <path class="segment" fill="#02bfe7" d="M 443.39 175.35 A 190 190 0 0 1 443.39 424.65 L 398.11 385.29 A 130 130 0 0 0 398.11 214.71 Z"/>
+      <text class="inner-label" x="460" y="300">
+        <tspan x="460" dy="0">Data and</tspan>
+        <tspan x="460" dy="16">Input</tspan>
+      </text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="ai-model">
+      <path class="segment" fill="#02bfe7" d="M 424.65 443.39 A 190 190 0 0 1 175.35 443.39 L 214.71 398.11 A 130 130 0 0 0 385.29 398.11 Z"/>
+      <text class="inner-label" x="300" y="462">AI Model</text>
+    </g>
+
+    <g class="hotspot" data-hotspot-id="task-output">
+      <path class="segment" fill="#02bfe7" d="M 156.61 424.65 A 190 190 0 0 1 156.61 175.35 L 201.89 214.71 A 130 130 0 0 0 201.89 385.29 Z"/>
+      <text class="inner-label" x="140" y="300">
+        <tspan x="140" dy="0">Task and</tspan>
+        <tspan x="140" dy="16">Output</tspan>
+      </text>
+    </g>
+  </g>
+
+  <g id="center" class="hotspot" data-hotspot-id="people-planet">
+    <circle class="segment" cx="300" cy="300" r="95" fill="#003366"/>
+    <text class="center-label" x="300" y="300">
+      <tspan x="300" dy="0">People</tspan>
+      <tspan x="300" dy="30">and Planet</tspan>
+    </text>
+  </g>
+</svg>
