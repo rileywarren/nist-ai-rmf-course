@@ -5,9 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 try:
-    from .routers import progress, quiz, scenarios
+    from .routers import progress, quiz, scenarios, tts
 except ImportError:
-    from routers import progress, quiz, scenarios
+    from routers import progress, quiz, scenarios, tts
 
 
 app = FastAPI(title="NIST AI RMF Course API")
@@ -24,6 +24,7 @@ app.add_middleware(
 app.include_router(progress.router, prefix="/api")
 app.include_router(quiz.router, prefix="/api")
 app.include_router(scenarios.router, prefix="/api")
+app.include_router(tts.router, prefix="/api")
 
 
 @app.get("/api/health")

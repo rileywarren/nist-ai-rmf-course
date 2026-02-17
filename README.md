@@ -4,19 +4,23 @@ A local, self-contained, interactive training course covering the NIST Artificia
 
 ## Prerequisites
 
-- Python 3.11+
+- Python 3.10-3.12 (Kokoro currently does not support Python 3.13)
 - Node.js 18+ (includes npm)
 - A modern web browser
+- For neural TTS (Kokoro): `espeak-ng` installed on your system
 
 ## Quick Start
 
 ```bash
-git clone <repo> && cd nist-ai-rmf-course
+git clone https://github.com/rileywarren/nist-ai-rmf-course.git && cd nist-ai-rmf-course
 ./scripts/setup.sh
 ./scripts/start.sh
 ```
 
 `scripts/start.sh` starts both services and opens the course in your browser.
+
+`scripts/setup.sh` and `scripts/start.sh` are Bash scripts for macOS/Linux.
+On Windows, use the manual PowerShell instructions below.
 
 - API: `http://localhost:8000/api/health`
 - Frontend (dev server): `http://localhost:5173`
@@ -42,6 +46,38 @@ npm install
 npm run dev
 ```
 
+### Windows (PowerShell) setup and run
+
+1. Install prerequisites:
+   - Python 3.10-3.12
+   - Node.js 18+
+   - `espeak-ng` (install the Windows `.msi` package from https://github.com/espeak-ng/espeak-ng/releases/latest)
+2. Open PowerShell in the project root, then run:
+   (If Python 3.11 is not installed, replace `-3.11` with `-3.10` or `-3.12`.)
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python -m pip install --upgrade pip
+.\.venv\Scripts\python -m pip install -r requirements.txt
+cd .\client
+npm install
+cd ..
+```
+
+3. Start backend in one PowerShell window:
+
+```powershell
+cd .\server
+..\.venv\Scripts\python -m uvicorn main:app --reload --port 8000
+```
+
+4. Start frontend in a second PowerShell window:
+
+```powershell
+cd .\client
+npm run dev
+```
+
 ## Course Structure
 
 - **Module 1: Introduction & Framing Risk** - Understand what the NIST AI RMF is, how risk is defined, and key challenges in managing AI risk.
@@ -63,6 +99,18 @@ npm run dev
 - 30-term searchable glossary
 - 11 earnable achievement badges
 - Progress tracking (persisted locally)
+- Neural lesson narration (Kokoro-82M) with voice and speed controls
+
+## Neural TTS Notes (Kokoro)
+
+Kokoro is served from the local FastAPI backend at `POST /api/tts`.
+Model reference: https://huggingface.co/hexgrad/Kokoro-82M
+
+If narration fails with an `espeak-ng` error, install it and restart:
+
+- macOS: `brew install espeak-ng`
+- Ubuntu/Debian: `sudo apt-get install espeak-ng`
+- Windows: install the `espeak-ng` `.msi` package, then restart PowerShell so PATH updates are applied
 
 ## Resetting Progress
 

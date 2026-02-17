@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import DiagramViewer from './DiagramViewer';
 import DragDrop from './DragDrop';
 import FlashCards from './FlashCards';
 import TradeoffSlider from './TradeoffSlider';
+import { getTtsVoices, synthesizeTts } from '../utils/api';
 
 function escapeHtml(text) {
   return String(text || '')
@@ -31,6 +32,474 @@ function markdownToHtml(content) {
   return paragraphs
     .map((paragraph) => `<p>${inlineMarkdown(paragraph).replace(/\n/g, '<br/>')}</p>`)
     .join('');
+}
+
+const TTS_RATE_STORAGE_KEY = 'nist-course-tts-rate';
+const TTS_VOICE_STORAGE_KEY = 'nist-course-tts-voice';
+
+function stripMarkdownForSpeech(text) {
+  return String(text || '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function buildSpeakableLessonText(lesson) {
+  if (!lesson || typeof lesson !== 'object') return '';
+  const sections = Array.isArray(lesson.sections) ? lesson.sections : [];
+  const parts = [];
+
+  for (const section of sections) {
+    if (!section || typeof section !== 'object') continue;
+    if (section.type === 'text' && section.content) {
+      parts.push(stripMarkdownForSpeech(section.content));
+    }
+    if (section.type === 'callout') {
+      if (section.title) parts.push(stripMarkdownForSpeech(section.title));
+      if (section.content) parts.push(stripMarkdownForSpeech(section.content));
+    }
+  }
+
+  if (Array.isArray(lesson.keyTakeaways) && lesson.keyTakeaways.length > 0) {
+    parts.push('Key takeaways.');
+    for (const takeaway of lesson.keyTakeaways) {
+      parts.push(stripMarkdownForSpeech(takeaway));
+    }
+  }
+
+  return parts.filter(Boolean).join(' ');
+}
+
+function countWords(text) {
+  return String(text || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function sectionLabel(section) {
+  if (!section || typeof section !== 'object') return 'Learning Step';
+  if (section.type === 'text') return 'Reading';
+  if (section.type === 'callout') return 'Concept Highlight';
+  if (section.type === 'diagram') return 'Diagram';
+  if (section.type !== 'interactive') return 'Learning Step';
+
+  if (section.interactiveType === 'poll') return 'Quick Poll';
+  if (section.interactiveType === 'checkboxAnalysis') return 'Risk Analysis Check';
+  if (section.interactiveType === 'checklist') return 'Checklist';
+  if (section.interactiveType === 'worksheet') return 'Worksheet';
+  if (section.interactiveType === 'decisionTree') return 'Decision Path';
+  if (section.interactiveType === 'ranking') return 'Priority Ranking';
+  if (section.interactiveType === 'dragDrop') return 'Drag and Drop';
+  if (section.interactiveType === 'flashcards') return 'Flash Cards';
+  if (section.interactiveType === 'diagramExplore') return 'Diagram Explorer';
+  if (section.interactiveType === 'tradeoffSlider') return 'Tradeoff Slider';
+  return 'Interactive';
+}
+
+function messageForConfidence(level) {
+  if (level === 'review') return 'Good signal. Replay this lesson with audio and revisit one key takeaway.';
+  if (level === 'solid') return 'You are in a strong range. Try the quiz next while concepts are fresh.';
+  if (level === 'teach') return 'Excellent. Move to the scenario and apply this in a realistic decision.';
+  return '';
+}
+
+function TakeawayChallenge({ takeaways }) {
+  const safeTakeaways = useMemo(
+    () => (Array.isArray(takeaways) ? takeaways.map((item) => String(item || '').trim()).filter(Boolean) : []),
+    [takeaways],
+  );
+  const takeawaySignature = safeTakeaways.join('||');
+
+  const [index, setIndex] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const [answered, setAnswered] = useState(false);
+  const [score, setScore] = useState({ attempts: 0, recalled: 0 });
+
+  useEffect(() => {
+    setIndex(0);
+    setRevealed(false);
+    setAnswered(false);
+    setScore({ attempts: 0, recalled: 0 });
+  }, [takeawaySignature]);
+
+  if (safeTakeaways.length === 0) return null;
+
+  const current = safeTakeaways[index];
+
+  const recordAttempt = (remembered) => {
+    if (answered) return;
+    setAnswered(true);
+    setRevealed(true);
+    setScore((prev) => ({
+      attempts: prev.attempts + 1,
+      recalled: remembered ? prev.recalled + 1 : prev.recalled,
+    }));
+  };
+
+  const goNext = () => {
+    setIndex((prev) => (prev + 1) % safeTakeaways.length);
+    setRevealed(false);
+    setAnswered(false);
+  };
+
+  return (
+    <section className="space-y-3 rounded-xl border border-cyan-200 bg-cyan-50/60 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-sm font-semibold text-cyan-900">60-Second Takeaway Challenge</p>
+        <p className="text-xs font-semibold text-cyan-800">
+          Recall Score: {score.recalled}/{score.attempts}
+        </p>
+      </div>
+
+      <p className="text-sm text-cyan-900">
+        Before revealing, restate takeaway {index + 1} in your own words.
+      </p>
+
+      <div className="rounded-lg border border-cyan-200 bg-white px-3 py-2">
+        {revealed ? (
+          <p className="text-sm text-slate-800">{current}</p>
+        ) : (
+          <p className="text-sm text-slate-700">Hidden. Try recalling first, then reveal.</p>
+        )}
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => recordAttempt(true)}
+          disabled={answered}
+          className="rounded-lg border border-emerald-300 bg-emerald-100 px-3 py-2 text-xs font-semibold text-emerald-800 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          I Recalled It
+        </button>
+        <button
+          type="button"
+          onClick={() => recordAttempt(false)}
+          disabled={answered}
+          className="rounded-lg border border-amber-300 bg-amber-100 px-3 py-2 text-xs font-semibold text-amber-900 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          Reveal Now
+        </button>
+        <button
+          type="button"
+          onClick={goNext}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700"
+        >
+          Next Takeaway
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function readStoredRate() {
+  if (typeof window === 'undefined') return 1;
+  const parsed = Number(window.localStorage.getItem(TTS_RATE_STORAGE_KEY));
+  if (!Number.isFinite(parsed)) return 1;
+  return Math.min(1.6, Math.max(0.8, parsed));
+}
+
+const DEFAULT_KOKORO_VOICES = [
+  'af_heart',
+  'af_bella',
+  'af_sarah',
+  'af_nicole',
+  'am_adam',
+  'am_michael',
+  'bf_emma',
+  'bm_george',
+];
+
+function LessonAudioControls({ text }) {
+  const normalizedText = useMemo(() => String(text || '').trim(), [text]);
+
+  const [voices, setVoices] = useState(DEFAULT_KOKORO_VOICES);
+  const [voice, setVoice] = useState(() => {
+    if (typeof window === 'undefined') return DEFAULT_KOKORO_VOICES[0];
+    return window.localStorage.getItem(TTS_VOICE_STORAGE_KEY) || DEFAULT_KOKORO_VOICES[0];
+  });
+  const [rate, setRate] = useState(readStoredRate);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
+  const [speedRange, setSpeedRange] = useState({ min: 0.7, max: 1.4 });
+
+  const audioRef = useRef(null);
+  const objectUrlRef = useRef('');
+  const requestSignatureRef = useRef('');
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    const audio = new Audio();
+    audio.preload = 'auto';
+
+    const onPlaying = () => setStatus('playing');
+    const onPause = () => {
+      if (audio.ended || audio.currentTime === 0) return;
+      setStatus('paused');
+    };
+    const onEnded = () => setStatus('finished');
+    const onError = () => {
+      setStatus('idle');
+      setError('Audio playback failed in this browser.');
+    };
+
+    audio.addEventListener('playing', onPlaying);
+    audio.addEventListener('pause', onPause);
+    audio.addEventListener('ended', onEnded);
+    audio.addEventListener('error', onError);
+    audioRef.current = audio;
+
+    return () => {
+      isMountedRef.current = false;
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+      audio.removeEventListener('playing', onPlaying);
+      audio.removeEventListener('pause', onPause);
+      audio.removeEventListener('ended', onEnded);
+      audio.removeEventListener('error', onError);
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+        objectUrlRef.current = '';
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadVoices = async () => {
+      try {
+        const payload = await getTtsVoices();
+        if (cancelled || !payload || typeof payload !== 'object') return;
+
+        const nextVoices = Array.isArray(payload.voices)
+          ? payload.voices.map((item) => String(item || '').trim()).filter(Boolean)
+          : [];
+        if (nextVoices.length > 0) {
+          setVoices(nextVoices);
+        }
+
+        const minSpeed = Number(payload.minSpeed);
+        const maxSpeed = Number(payload.maxSpeed);
+        if (Number.isFinite(minSpeed) && Number.isFinite(maxSpeed) && minSpeed < maxSpeed) {
+          setSpeedRange({ min: minSpeed, max: maxSpeed });
+        }
+
+        const suggestedDefault = typeof payload.defaultVoice === 'string' ? payload.defaultVoice : '';
+        setVoice((current) => {
+          if (current && nextVoices.includes(current)) return current;
+          if (suggestedDefault && nextVoices.includes(suggestedDefault)) return suggestedDefault;
+          if (nextVoices.length > 0) return nextVoices[0];
+          return current || DEFAULT_KOKORO_VOICES[0];
+        });
+      } catch (voiceError) {
+        console.warn('Unable to load Kokoro voices:', voiceError);
+      }
+    };
+
+    loadVoices();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(TTS_RATE_STORAGE_KEY, String(rate));
+  }, [rate]);
+
+  useEffect(() => {
+    setRate((current) => Math.min(speedRange.max, Math.max(speedRange.min, current)));
+  }, [speedRange.max, speedRange.min]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !voice) return;
+    window.localStorage.setItem(TTS_VOICE_STORAGE_KEY, voice);
+  }, [voice]);
+
+  const resetAudioSource = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
+
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = '';
+    }
+    requestSignatureRef.current = '';
+  }, []);
+
+  useEffect(() => {
+    setError('');
+    setStatus('idle');
+    resetAudioSource();
+  }, [normalizedText, resetAudioSource]);
+
+  const stopPlayback = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
+    setStatus('idle');
+  }, []);
+
+  const startPlayback = useCallback(async () => {
+    if (!normalizedText) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    setError('');
+
+    if (status === 'paused' && audio.src) {
+      try {
+        await audio.play();
+      } catch (playError) {
+        setError('Playback was blocked. Press Play again.');
+      }
+      return;
+    }
+
+    if (status === 'playing' && audio.src) {
+      try {
+        audio.currentTime = 0;
+        await audio.play();
+      } catch (playError) {
+        setError('Playback was blocked. Press Play again.');
+      }
+      return;
+    }
+
+    const signature = `${normalizedText}::${voice}::${rate}`;
+    const shouldGenerate = !audio.src || requestSignatureRef.current !== signature;
+
+    if (shouldGenerate) {
+      setStatus('synthesizing');
+      try {
+        const blob = await synthesizeTts({
+          text: normalizedText,
+          voice: voice || DEFAULT_KOKORO_VOICES[0],
+          speed: rate,
+        });
+        if (!isMountedRef.current) return;
+
+        const nextUrl = URL.createObjectURL(blob);
+        if (objectUrlRef.current) {
+          URL.revokeObjectURL(objectUrlRef.current);
+        }
+        objectUrlRef.current = nextUrl;
+        audio.src = nextUrl;
+        requestSignatureRef.current = signature;
+      } catch (synthesisError) {
+        if (!isMountedRef.current) return;
+        setStatus('idle');
+        setError(synthesisError?.message || 'Unable to generate Kokoro audio right now.');
+        return;
+      }
+    }
+
+    try {
+      await audio.play();
+    } catch (playError) {
+      setStatus('idle');
+      setError('Playback was blocked. Press Play again.');
+    }
+  }, [normalizedText, rate, status, voice]);
+
+  const canPlay = normalizedText.length > 0;
+  const speedOptions = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4];
+  const validSpeedOptions = speedOptions.filter((value) => value >= speedRange.min && value <= speedRange.max);
+
+  return (
+    <section className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="text-sm font-semibold text-slate-900">Lesson Audio (Kokoro)</p>
+          <p className="text-xs text-slate-600">Neural TTS via local backend model `hexgrad/Kokoro-82M`.</p>
+        </div>
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Status: {status}</p>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={startPlayback}
+          disabled={!canPlay || status === 'synthesizing'}
+          className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {status === 'paused' ? 'Resume' : status === 'synthesizing' ? 'Generating...' : status === 'playing' ? 'Restart' : 'Play'}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            const audio = audioRef.current;
+            if (!audio || status !== 'playing') return;
+            audio.pause();
+            setStatus('paused');
+          }}
+          disabled={status !== 'playing'}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Pause
+        </button>
+
+        <button
+          type="button"
+          onClick={stopPlayback}
+          disabled={status === 'idle' || status === 'synthesizing'}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Stop
+        </button>
+      </div>
+
+      <div className="flex flex-wrap gap-3">
+        <label className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+          Speed
+          <select
+            value={String(rate)}
+            onChange={(event) => {
+              const nextRate = Number(event.target.value);
+              setRate(nextRate);
+            }}
+            className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs"
+          >
+            {(validSpeedOptions.length > 0 ? validSpeedOptions : [1]).map((value) => (
+              <option key={`speed-${value}`} value={String(value)}>
+                {value.toFixed(1)}x
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+          Voice
+          <select
+            value={voice}
+            onChange={(event) => setVoice(event.target.value)}
+            className="max-w-[240px] rounded-md border border-slate-300 bg-white px-2 py-1 text-xs"
+          >
+            {voices.map((voiceOption) => (
+              <option key={voiceOption} value={voiceOption}>
+                {voiceOption}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {error ? <p className="text-xs text-rose-700">{error}</p> : null}
+      {!canPlay ? <p className="text-xs text-slate-600">No readable text found in this lesson.</p> : null}
+      {canPlay ? <p className="text-xs text-slate-600">First playback can take a few seconds while Kokoro loads and generates audio.</p> : null}
+    </section>
+  );
 }
 
 function TextSection({ section }) {
@@ -391,25 +860,137 @@ function SectionRenderer({ section }) {
 
 export default function LessonViewer({ lesson }) {
   const sections = Array.isArray(lesson?.sections) ? lesson.sections : [];
+  const keyTakeaways = Array.isArray(lesson?.keyTakeaways) ? lesson.keyTakeaways : [];
+  const lessonIdentity = `${lesson?.lessonId || lesson?.id || lesson?.title || 'lesson'}-${sections.length}-${keyTakeaways.length}`;
+
+  const [completedSteps, setCompletedSteps] = useState(() => new Set());
+  const [confidence, setConfidence] = useState('');
+
+  const speechText = useMemo(() => buildSpeakableLessonText(lesson), [lesson]);
+
+  const estimatedReadingMinutes = useMemo(() => {
+    const wordsFromSections = sections.reduce((total, section) => {
+      if (!section || typeof section !== 'object') return total;
+      if (section.type === 'text') return total + countWords(stripMarkdownForSpeech(section.content));
+      if (section.type === 'callout') {
+        return total + countWords(stripMarkdownForSpeech(section.title)) + countWords(stripMarkdownForSpeech(section.content));
+      }
+      return total;
+    }, 0);
+
+    const takeawayWords = keyTakeaways.reduce((total, takeaway) => total + countWords(stripMarkdownForSpeech(takeaway)), 0);
+    const totalWords = wordsFromSections + takeawayWords;
+    return Math.max(1, Math.ceil(totalWords / 180));
+  }, [keyTakeaways, sections]);
+
+  useEffect(() => {
+    setCompletedSteps(new Set());
+    setConfidence('');
+  }, [lessonIdentity]);
+
+  const completedCount = completedSteps.size;
+  const completionPercent = sections.length > 0 ? Math.round((completedCount / sections.length) * 100) : 0;
 
   return (
     <div className="space-y-4">
+      <section className="space-y-3 rounded-xl border border-cyan-200 bg-gradient-to-r from-cyan-50 to-sky-50 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm font-semibold text-cyan-950">Lesson Sprint</p>
+          <p className="text-xs font-semibold text-cyan-900">
+            Estimated reading: {estimatedReadingMinutes} min
+          </p>
+        </div>
+        <p className="text-sm text-cyan-900">
+          Complete each step to keep momentum high.
+        </p>
+        <div className="space-y-1">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-cyan-100">
+            <div className="h-full rounded-full bg-cyan-600 transition-all" style={{ width: `${completionPercent}%` }} />
+          </div>
+          <p className="text-xs font-semibold text-cyan-900">
+            {completedCount}/{sections.length} steps completed ({completionPercent}%)
+          </p>
+        </div>
+      </section>
+
+      <LessonAudioControls text={speechText} />
+
       {sections.length === 0 ? <p className="text-sm text-slate-600">No lesson sections are available.</p> : null}
 
-      {sections.map((section, index) => (
-        <SectionRenderer key={`${section?.type || 'section'}-${index}`} section={section} />
-      ))}
+      {sections.map((section, index) => {
+        const done = completedSteps.has(index);
+        return (
+          <article
+            key={`${section?.type || 'section'}-${index}`}
+            className={`space-y-3 rounded-xl border p-4 ${done ? 'border-emerald-300 bg-emerald-50/50' : 'border-slate-200 bg-white'}`}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Step {index + 1} of {sections.length}</p>
+                <p className="text-sm font-semibold text-slate-800">{sectionLabel(section)}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() =>
+                  setCompletedSteps((prev) => {
+                    const next = new Set(prev);
+                    if (next.has(index)) next.delete(index);
+                    else next.add(index);
+                    return next;
+                  })
+                }
+                className={`rounded-lg border px-3 py-2 text-xs font-semibold ${
+                  done
+                    ? 'border-emerald-300 bg-emerald-100 text-emerald-800'
+                    : 'border-slate-300 bg-white text-slate-700'
+                }`}
+              >
+                {done ? 'Completed' : 'Mark Step Complete'}
+              </button>
+            </div>
+            <SectionRenderer section={section} />
+          </article>
+        );
+      })}
 
-      {Array.isArray(lesson?.keyTakeaways) && lesson.keyTakeaways.length > 0 ? (
+      {keyTakeaways.length > 0 ? (
         <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
           <p className="text-sm font-semibold text-slate-900">Key Takeaways</p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
-            {lesson.keyTakeaways.map((takeaway, index) => (
+            {keyTakeaways.map((takeaway, index) => (
               <li key={`takeaway-${index}`}>{takeaway}</li>
             ))}
           </ul>
         </div>
       ) : null}
+
+      <TakeawayChallenge takeaways={keyTakeaways} />
+
+      <section className="space-y-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <p className="text-sm font-semibold text-slate-900">30-Second Confidence Check</p>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { id: 'review', label: 'Need Review' },
+            { id: 'solid', label: 'Getting It' },
+            { id: 'teach', label: 'Can Teach It' },
+          ].map((option) => {
+            const selected = confidence === option.id;
+            return (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => setConfidence(option.id)}
+                className={`rounded-lg border px-3 py-2 text-xs font-semibold ${
+                  selected ? 'border-sky-300 bg-sky-100 text-sky-900' : 'border-slate-300 bg-white text-slate-700'
+                }`}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+        {confidence ? <p className="text-sm text-slate-700">{messageForConfidence(confidence)}</p> : null}
+      </section>
     </div>
   );
 }
