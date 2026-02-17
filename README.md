@@ -5,7 +5,7 @@ A local, self-contained, interactive training course covering the NIST Artificia
 ## Prerequisites
 
 - Python 3.11+
-- Node.js 18+
+- Node.js 18+ (includes npm)
 - A modern web browser
 
 ## Quick Start
@@ -14,6 +14,32 @@ A local, self-contained, interactive training course covering the NIST Artificia
 git clone <repo> && cd nist-ai-rmf-course
 ./scripts/setup.sh
 ./scripts/start.sh
+```
+
+`scripts/start.sh` starts both services and opens the course in your browser.
+
+- API: `http://localhost:8000/api/health`
+- Frontend (dev server): `http://localhost:5173`
+
+## Project Structure
+
+- **Backend:** FastAPI app in `server/main.py` (starts on port `8000`)
+- **Frontend:** React + Vite app in `client` (starts on port `5173`)
+- Data is stored in local JSON files under `server/data` (including `server/data/progress.json`), so no database or external service is required.
+
+### Manual run
+
+If you prefer to run services separately:
+
+```bash
+cd server
+python -m uvicorn main:app --reload --port 8000
+```
+
+```bash
+cd client
+npm install
+npm run dev
 ```
 
 ## Course Structure
@@ -37,12 +63,6 @@ git clone <repo> && cd nist-ai-rmf-course
 - 30-term searchable glossary
 - 11 earnable achievement badges
 - Progress tracking (persisted locally)
-
-## How It Works
-
-- **Backend:** Python/FastAPI serving course content and tracking progress
-- **Frontend:** React/Vite with Tailwind CSS
-- All data is stored locally in JSON files - no database, no internet required
 
 ## Resetting Progress
 
